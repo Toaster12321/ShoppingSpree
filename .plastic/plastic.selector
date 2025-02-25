@@ -1,4 +1,0 @@
-repository "ShoppingSpree/ShoppingSpree@1375778309797@cloud"
-  path "/"
-    br "/main"
-    co "/main"
