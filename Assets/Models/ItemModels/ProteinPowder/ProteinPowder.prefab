@@ -11,15 +11,17 @@ GameObject:
   - component: {fileID: 468450}
   - component: {fileID: 3386292}
   - component: {fileID: 2397964}
-  - component: {fileID: 6408092}
   - component: {fileID: 6239775408466889425}
+  - component: {fileID: 5280978026143831074}
+  - component: {fileID: -5787237072976669036}
+  - component: {fileID: 5065239400918158628}
   m_Layer: 0
   m_Name: ProteinPowder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &468450
 Transform:
   m_ObjectHideFlags: 0
@@ -88,8 +90,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6408092
-MeshCollider:
+--- !u!114 &6239775408466889425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0565ad3a40dad4dab4fa65730300c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemScriptableObject: {fileID: 11400000, guid: 84386da0e02700842a3ed93068734685, type: 2}
+--- !u!54 &5280978026143831074
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164070}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-5787237072976669036
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,11 +148,10 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: b3197ddda73492b478338f01a16d25d5, type: 3}
---- !u!114 &6239775408466889425
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2.5643837}
+  m_Center: {x: -0.000000015108967, y: -0.00000019449297, z: 1.2830905}
+--- !u!114 &5065239400918158628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 164070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce0565ad3a40dad4dab4fa65730300c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fa76d4ba98f43c47917a83e06b07ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 84386da0e02700842a3ed93068734685, type: 2}

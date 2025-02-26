@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee317c3b156c374ea19a4c30a20c65b, type: 3}
   m_Name: ProteinPowder
   m_EditorClassIdentifier: 
-  cooldown: 0
+  id: InventoryItem_ProteinPowder
   item_type: 0
-  item_sprite: {fileID: 0}
+  icon: {fileID: 21300000, guid: fb626fdfedbe06f469fb3db2627b9fe6, type: 3}

@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
 
     public List<itemType> inventoryList;
     public int selectedItem;
+    public float playerReach;
 
     [Space(20)]
     [Header("Keys")]
@@ -18,6 +19,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject protein_item;
     [SerializeField] GameObject coffee_item;
     [SerializeField] GameObject milkcarton_item;
+
+    [SerializeField] Camera cam;
+    [SerializeField] GameObject pickUpItem_gameobject;
 
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
 
@@ -32,6 +36,32 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
+        //Picking up items
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+
+        if(Physics.Raycast(ray, out hitInfo, playerReach))
+        {
+            IPickable item = hitInfo.collider.GetComponent<IPickable>();
+            if (item != null )
+            {
+                pickUpItem_gameobject.SetActive(true);
+                if(Input.GetKey(pickItemKey))
+                {
+                    inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type);
+                    item.PickItem();
+                }
+            }
+            else
+            {
+                pickUpItem_gameobject.SetActive(false);
+            }
+        }
+        else
+        {
+            pickUpItem_gameobject.SetActive(false);
+        }
+
         //press 1
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
         {
@@ -61,4 +91,9 @@ public class PlayerInventory : MonoBehaviour
         GameObject selectedItemGameObject = itemSetActive[inventoryList[selectedItem]];
         selectedItemGameObject.SetActive(true);
     }
+}
+
+public interface IPickable
+{
+    void PickItem();
 }

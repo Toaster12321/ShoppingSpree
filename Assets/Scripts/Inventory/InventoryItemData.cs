@@ -6,9 +6,9 @@ using UnityEngine;
 public class InventoryItemData : ScriptableObject
 {
     [Header("Properties")]
-    public float cooldown;
+    public string id;
     public itemType item_type;
-    public Sprite item_sprite;
+    public Sprite icon;
 }
 
 public enum itemType {protien_powder, coffee, milk_carton};

@@ -1,16 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickable : MonoBehaviour
+public class ItemPickable : MonoBehaviour, IPickable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public InventoryItemData itemScriptableObject;
 
-    // Update is called once per frame
-    void Update()
+    public void PickItem()
     {
-        
+        Destroy(gameObject);
     }
 }
