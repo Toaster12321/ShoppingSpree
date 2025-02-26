@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     [Header("General")]
@@ -13,6 +14,11 @@ public class PlayerInventory : MonoBehaviour
     [Header("Keys")]
     [SerializeField] KeyCode throwItemAway;
     [SerializeField] KeyCode pickItemKey;
+
+    [Space(20)]
+    [Header("UI")]
+    [SerializeField] Image[] inventorySlotImage = new Image[3];
+    [SerializeField] Sprite emptySlotSprite;
 
     [Space(20)]
     [Header("Item Game Objects")]
@@ -61,6 +67,21 @@ public class PlayerInventory : MonoBehaviour
         {
             pickUpItem_gameobject.SetActive(false);
         }
+        //UI
+
+        for (int i = 0; i< 3; i++)
+        {
+            if(i < inventoryList.Count)
+            {
+                inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.icon;
+                inventorySlotImage[i].color = new Color(255, 255, 255, 255);
+                
+            }
+            else
+            {
+                inventorySlotImage[i].sprite = emptySlotSprite;
+            }
+        }
 
         //press 1
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
@@ -87,6 +108,9 @@ public class PlayerInventory : MonoBehaviour
         protein_item.SetActive(false);
         coffee_item.SetActive(false);
         milkcarton_item.SetActive(false);
+
+        if (inventoryList.Count == 0)
+            return;
 
         GameObject selectedItemGameObject = itemSetActive[inventoryList[selectedItem]];
         selectedItemGameObject.SetActive(true);
