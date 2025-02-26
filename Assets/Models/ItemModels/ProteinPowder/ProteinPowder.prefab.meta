@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4df3b231b76808d439e018f3b2abce25
+labels:
+- Whey
+- Protein
+timeCreated: 1434182608
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39270
+  packageName: Bodybuilding Supplements (Musclebang)
+  packageVersion: 1.0
+  assetPath: Assets/BMA's Supplement Pack/Prefabs/Whey, 5lbs.prefab
+  uploadId: 67968
