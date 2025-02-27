@@ -5,21 +5,21 @@ using UnityEngine.UI;
 public class healthBar : MonoBehaviour
 {
     public Slider healthSlider;
-    public float maxHealth = 100f;
-    public float health;
+    [SerializeField]private PlayerCharacter _playerHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = maxHealth;
+        healthSlider.maxValue = _playerHealth.maxHealth;
+        healthSlider.value = _playerHealth.currentHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(healthSlider.value != health)
+        if(healthSlider.value != _playerHealth.currentHealth)
         {
-            healthSlider.value = health;
+            healthSlider.value = _playerHealth.currentHealth;
         }
 
         //press x to take damage (tester)
@@ -27,12 +27,15 @@ public class healthBar : MonoBehaviour
         {
             takeDamage(20);
         }
+       
     }
 
     void takeDamage(float damage)
     {
-        if (health == 0 || health < 0 )
-            return;
-        health -= damage;
+        if (_playerHealth.currentHealth == 0 || _playerHealth.currentHealth < 0 )
+                return;
+        _playerHealth.currentHealth -= damage;
     }
+
+
 }
