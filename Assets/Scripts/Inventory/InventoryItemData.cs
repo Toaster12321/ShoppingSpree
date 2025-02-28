@@ -11,4 +11,4 @@ public class InventoryItemData : ScriptableObject
     public Sprite icon;
 }
 
-public enum itemType {protien_powder, coffee, milk_carton};
+public enum itemType {protein_powder, coffee, milk_carton};

@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 public class PlayerInventory : MonoBehaviour
 {
-    private PlayerCharacter _playerHealth;
+    private PlayerCharacter _playerStats;
+    private TempBuff _playerBuff;
 
     [Header("General")]
 
@@ -36,9 +38,12 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        _playerHealth = GetComponent<PlayerCharacter>();
+        _playerStats = GetComponent<PlayerCharacter>();
+        _playerBuff = GetComponent<TempBuff>();
 
-        itemSetActive.Add(itemType.protien_powder, protein_item);
+        _playerBuff.buffEnd += resetDamage;
+
+        itemSetActive.Add(itemType.protein_powder, protein_item);
         itemSetActive.Add(itemType.coffee, coffee_item);
         itemSetActive.Add(itemType.milk_carton, milkcarton_item);
 
@@ -146,21 +151,35 @@ public class PlayerInventory : MonoBehaviour
 
         if (currentItem == itemType.milk_carton)
         {
-            if(_playerHealth != null)
+            if(_playerStats != null)
             {
-                _playerHealth.healHealth(20);
+                _playerStats.healHealth(20);
             }
 
             inventoryList.RemoveAt(selectedItem);
 
             //fixes bug where out of range index is thrown 
-            if (selectedItem >= inventoryList.Count)
+            refreshInventorySlot();
+
+        }
+        else if (currentItem == itemType.protein_powder)
+        {
+            if (_playerStats != null)
             {
-                selectedItem = inventoryList.Count - 1;
+                //20% increase to damage
+                _playerStats.increaseDMG(_playerStats.currentDMG * 0.20f);
+
+                //start damage buff timer for 20s
+                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
+                _playerBuff.startBuff(5f);
+
             }
 
-            NewItemSelected();
+            inventoryList.RemoveAt(selectedItem);
+
+            refreshInventorySlot();
         }
+        
     }
 
     private void NewItemSelected()
@@ -174,6 +193,27 @@ public class PlayerInventory : MonoBehaviour
 
         GameObject selectedItemGameObject = itemSetActive[inventoryList[selectedItem]];
         selectedItemGameObject.SetActive(true);
+    }
+
+    //fixes bug where out of range index is thrown from incorrect list count after consuming an item
+    private void refreshInventorySlot()
+    {
+        if (selectedItem >= inventoryList.Count)
+        {
+            selectedItem = inventoryList.Count - 1;
+        }
+
+        NewItemSelected();
+    }
+
+    private void resetDamage()
+    {
+        if (_playerStats != null)
+        {
+            _playerStats.currentDMG = _playerStats.baseDMG;
+            Debug.Log("buff over, current dmg:" + _playerStats.currentDMG);
+        }
+
     }
 }
 
