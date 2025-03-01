@@ -25,33 +25,36 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (axes == RotationAxes.MouseX)
+        if (Time.timeScale != 0.0f)
         {
-            //horizontal rotation
-            transform.Rotate(0, sensitivityHor * Input.GetAxis("Mouse X"), 0);
-        }
-        else if (axes == RotationAxes.MouseY)
-        {
-            //vertical rotation
-            //transform.Rotate(sensitivityVert * Input.GetAxis("Mouse Y"), 0, 0);
-            verticalRot -= Input.GetAxis("Mouse Y") * sensitivityVert;
-            verticalRot = Mathf.Clamp(verticalRot, minumumVert, maximumVert);
+            if (axes == RotationAxes.MouseX)
+            {
+                //horizontal rotation
+                transform.Rotate(0, sensitivityHor * Input.GetAxis("Mouse X"), 0);
+            }
+            else if (axes == RotationAxes.MouseY)
+            {
+                //vertical rotation
+                //transform.Rotate(sensitivityVert * Input.GetAxis("Mouse Y"), 0, 0);
+                verticalRot -= Input.GetAxis("Mouse Y") * sensitivityVert;
+                verticalRot = Mathf.Clamp(verticalRot, minumumVert, maximumVert);
 
-            float horizontalRot = transform.localEulerAngles.y;
+                float horizontalRot = transform.localEulerAngles.y;
 
-            transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
-            
-        }
-        else
-        {
-            //horizontal and vertical rotation
-            verticalRot -= sensitivityVert * Input.GetAxis("Mouse Y");
-            verticalRot = Mathf.Clamp(verticalRot, minumumVert, maximumVert);
+                transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
 
-            float delta = sensitivityVert * Input.GetAxis("Mouse X");
-            float horizontalRot = transform.localEulerAngles.y + delta;
+            }
+            else
+            {
+                //horizontal and vertical rotation
+                verticalRot -= sensitivityVert * Input.GetAxis("Mouse Y");
+                verticalRot = Mathf.Clamp(verticalRot, minumumVert, maximumVert);
 
-            transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
+                float delta = sensitivityVert * Input.GetAxis("Mouse X");
+                float horizontalRot = transform.localEulerAngles.y + delta;
+
+                transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
+            }
         }
     }
 }

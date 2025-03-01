@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour
         RaycastHit hitInfo;
 
         //raycast to hit items 
-        if(Physics.Raycast(ray, out hitInfo, playerReach))
+        if (Physics.Raycast(ray, out hitInfo, playerReach))
         {
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
@@ -71,11 +71,11 @@ public class PlayerInventory : MonoBehaviour
                     //shows inventory full text
                     inventoryFull_gameobject.SetActive(true);
                     return;
-                    
+
                 }
                 //shows pickup text
                 pickUpItem_gameobject.SetActive(true);
-                if(Input.GetKey(pickItemKey))
+                if (Input.GetKey(pickItemKey))
                 {
                     //adds item to inventory list
                     inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type);
@@ -95,15 +95,15 @@ public class PlayerInventory : MonoBehaviour
         }
 
         //UI
-        for (int i = 0; i< 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if(i < inventoryList.Count)
+            if (i < inventoryList.Count)
             {
                 //adds sprite to each respective slot
                 inventorySlotImage[i].sprite = itemSetActive[inventoryList[i]].GetComponent<Item>().itemScriptableObject.icon;
                 //sets sprite to full alpha so icon shows
-                inventorySlotImage[i].color = new Color(1f, 1f, 1f, 1f); 
-                
+                inventorySlotImage[i].color = new Color(1f, 1f, 1f, 1f);
+
             }
             else
             {
@@ -153,7 +153,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (currentItem == itemType.milk_carton)
         {
-            if(_playerStats != null)
+            if (_playerStats != null)
             {
                 _playerStats.healHealth(20);
             }
@@ -172,7 +172,7 @@ public class PlayerInventory : MonoBehaviour
                 _playerBuff.startBuff(20f, TempBuff.BuffType.Damage, 1.2f);
 
                 //start damage buff timer for 20s
-                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);               
+                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
 
             }
 
@@ -186,11 +186,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 //20% increase to speed
                 _playerBuff.startBuff(20f, TempBuff.BuffType.Speed, 1.5f);
-
-                //start speed buff timer for 20s
-                Debug.Log("buffed, current speed:" + _playerSpeed.speed);
-                
-
+              
             }
 
             inventoryList.RemoveAt(selectedItem);
