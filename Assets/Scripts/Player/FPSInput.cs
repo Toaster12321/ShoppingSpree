@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,16 @@ using static SmartMovement;
 public class FPSInput : MonoBehaviour
 {
 
-    public float speed = 3f;
+    public float speed = 5f;
     public float gravity = -9.8f;
+    private float speedMult = 1f;
 
     //creating a varaible that references and stores the character controller in the editor
     //character controller also monitors collision for player
     private CharacterController characterController;
 
 
-    public const float _baseSpeed = 3f;
+    public const float _baseSpeed = 5f;
 
     //serialize field allows a private var to be able to be viewed in the editor
     [SerializeField] private MovementState _movementState;
@@ -31,7 +33,9 @@ public class FPSInput : MonoBehaviour
 
     private void OnSpeedChanged(float value)
     {
-        speed = _baseSpeed * value;
+        speedMult = value; //update speed multiplier to passed in value
+        speed = _baseSpeed * speedMult;
+        Debug.Log($"Speed changed : {speed} (Multiplier : {speedMult}");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -68,5 +72,27 @@ public class FPSInput : MonoBehaviour
 
         //move character using the Move method
         characterController.Move(movement);
+
     }
+
+    public void speedBuff(float mult, float duration)
+    {
+        StartCoroutine(startSpeedBuff(mult, duration));
+    }
+
+    private IEnumerator startSpeedBuff(float mult, float duration)
+    {
+        //apply multipler
+        speedMult *= mult;
+        //update multiplier to speed
+        OnSpeedChanged(speedMult);
+
+        //timer
+        yield return new WaitForSeconds(duration);
+
+        speedMult /= mult; //revert speed
+        OnSpeedChanged(speedMult); //reset speed
+    }
+
+    
 }

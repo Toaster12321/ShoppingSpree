@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
 {
     private PlayerCharacter _playerStats;
     private TempBuff _playerBuff;
+    private FPSInput _playerSpeed;
 
     [Header("General")]
 
@@ -40,6 +41,7 @@ public class PlayerInventory : MonoBehaviour
     {
         _playerStats = GetComponent<PlayerCharacter>();
         _playerBuff = GetComponent<TempBuff>();
+        _playerSpeed = GetComponent<FPSInput>();
 
         _playerBuff.buffEnd += resetDamage;
 
@@ -167,11 +169,10 @@ public class PlayerInventory : MonoBehaviour
             if (_playerStats != null)
             {
                 //20% increase to damage
-                _playerStats.increaseDMG(_playerStats.currentDMG * 0.20f);
+                _playerBuff.startBuff(20f, TempBuff.BuffType.Damage, 1.2f);
 
                 //start damage buff timer for 20s
-                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
-                _playerBuff.startBuff(5f);
+                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);               
 
             }
 
@@ -179,7 +180,24 @@ public class PlayerInventory : MonoBehaviour
 
             refreshInventorySlot();
         }
-        
+        else if (currentItem == itemType.coffee)
+        {
+            if (_playerSpeed != null)
+            {
+                //20% increase to speed
+                _playerBuff.startBuff(20f, TempBuff.BuffType.Speed, 1.5f);
+
+                //start speed buff timer for 20s
+                Debug.Log("buffed, current speed:" + _playerSpeed.speed);
+                
+
+            }
+
+            inventoryList.RemoveAt(selectedItem);
+
+            refreshInventorySlot();
+        }
+
     }
 
     private void NewItemSelected()
