@@ -11,6 +11,7 @@ public class SmartMovement : MonoBehaviour
         BLOCKED, // encountered an obstacle, will soon rotate
         ROTATE_LEFT, //rotate left
         ROTATE_RIGHT, //rotate right
+        CHASING // chasing the player
     }
 
     public float rotationSpeed = 90f;
@@ -18,8 +19,12 @@ public class SmartMovement : MonoBehaviour
     public float minObstacleRange = 3f;
     public float maxObstacleRange = 5f;
     public float sphereCastRadius = 0.9f;
+    public float chaseRange = 10f;
 
     public const float _baseSpeed = 3f;
+
+    [SerializeField] private Transform player; // Allow assignment via Inspector
+    private bool isPlayerInRange;
 
     //serialize field allows a private var to be able to be viewed in the editor
     [SerializeField] private MovementState _movementState;
@@ -38,93 +43,129 @@ public class SmartMovement : MonoBehaviour
     {
         movementSpeed = _baseSpeed * value;
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _movementState = MovementState.MOVING;
-
+        if (player == null)
+        {
+            Debug.LogError("Player object not assigned. Please assign the player object in the Inspector.");
+        }
+        // Reset rotation to ensure the object is upright
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         transform.Rotate(0, Random.Range(-180f, 180f), 0);
+
+        // Rotate the object -90 degrees in the x direction
+        RotateObjectX(-90f);
     }
 
     // FixedUpdate is called once per fixed time period
     void FixedUpdate()
     {
-        if (_movementState == MovementState.MOVING)
+        if (player == null)
         {
-            //if the enemy can move,move
-            // after that looks for obstacles
-            // if one is found switch to blocked state
-
-            //movement
-            transform.Translate(0, 0, movementSpeed * Time.fixedDeltaTime);
-            //Vector3 moveDirection = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
-            //transform.position += moveDirection * movementSpeed * Time.fixedDeltaTime;
-
-            //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
-
-            float distanceToObstacle = DetectObstacle();
-            if (distanceToObstacle < minObstacleRange)
-            {
-                _movementState = MovementState.BLOCKED;
-            }
-
+            Debug.LogError("Player object not assigned. Please assign the player object in the Inspector.");
+            return;
         }
 
-        else if (_movementState == MovementState.BLOCKED)
-        {
-            //if the AI has detected an obstacle its blocked from moving
-            //decide by coin flip to rotate left or right
+        isPlayerInRange = Vector3.Distance(transform.position, player.position) <= chaseRange;
 
-            int coin = Random.Range(0, 2);
-            if (coin == 0) _movementState = MovementState.ROTATE_LEFT;
-            else _movementState = MovementState.ROTATE_RIGHT;
+        if (isPlayerInRange)
+        {
+            _movementState = MovementState.CHASING;
         }
 
-        else if (_movementState == MovementState.ROTATE_LEFT)
+        switch (_movementState)
         {
-            //Detect obstacles, if found rotate
-            // if no obstacles are found, start moving again
-
-            if (DetectObstacle() < maxObstacleRange)
-            {
-                transform.Rotate(0, -rotationSpeed * Time.fixedDeltaTime, 0);
-            }
-            else
-            {
-                _movementState = MovementState.MOVING;
-            }
-        }
-
-        else if (_movementState == MovementState.ROTATE_RIGHT)
-        {
-            //same as rotate left except its positive rotation speed
-            if (DetectObstacle() < maxObstacleRange)
-            {
-                transform.Rotate(0, rotationSpeed * Time.fixedDeltaTime, 0);
-            }
-            else
-            {
-                _movementState = MovementState.MOVING;
-            }
+            case MovementState.MOVING:
+                Patrol();
+                break;
+            case MovementState.BLOCKED:
+                DecideRotation();
+                break;
+            case MovementState.ROTATE_LEFT:
+                RotateLeft();
+                break;
+            case MovementState.ROTATE_RIGHT:
+                RotateRight();
+                break;
+            case MovementState.CHASING:
+                ChasePlayer();
+                break;
         }
     }
 
-    //changes state to passed state
-    public void ChangeMovementState(MovementState newState)
+    private void Patrol()
     {
-        _movementState = newState;
+        transform.Translate(0, 0, movementSpeed * Time.fixedDeltaTime);
+        float distanceToObstacle = DetectObstacle();
+        if (distanceToObstacle < minObstacleRange)
+        {
+            _movementState = MovementState.BLOCKED;
+        }
+    }
+
+    private void DecideRotation()
+    {
+        int coin = Random.Range(0, 2);
+        _movementState = coin == 0 ? MovementState.ROTATE_LEFT : MovementState.ROTATE_RIGHT;
+    }
+
+    private void RotateLeft()
+    {
+        if (DetectObstacle() < maxObstacleRange)
+        {
+            transform.Rotate(0, -rotationSpeed * Time.fixedDeltaTime, 0);
+        }
+        else
+        {
+            _movementState = MovementState.MOVING;
+        }
+    }
+
+    private void RotateRight()
+    {
+        if (DetectObstacle() < maxObstacleRange)
+        {
+            transform.Rotate(0, rotationSpeed * Time.fixedDeltaTime, 0);
+        }
+        else
+        {
+            _movementState = MovementState.MOVING;
+        }
+    }
+
+    private void ChasePlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0; // Ensure the object stays upright
+        transform.Translate(direction * movementSpeed * Time.fixedDeltaTime, Space.World);
+
+        Vector3 lookDirection = player.position - transform.position;
+        lookDirection.y = 0; // Ensure the object stays upright
+        transform.rotation = Quaternion.LookRotation(lookDirection);
+
+        if (!isPlayerInRange)
+        {
+            _movementState = MovementState.MOVING;
+        }
     }
 
     //detects obstacle and returns the distance 
     private float DetectObstacle()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-
         RaycastHit hit;
         if (Physics.SphereCast(ray, sphereCastRadius, out hit))
         {
             return hit.distance;
         }
         else return -1f;
+    }
+
+    private void RotateObjectX(float angle)
+    {
+        transform.Rotate(angle, 0, 0);
     }
 }
