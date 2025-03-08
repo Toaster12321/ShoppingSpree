@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
-
     public float maxHealth = 100f;
     public float currentHealth;
     public float baseDMG = 10f;
     public float currentDMG;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //starting player health
+        // Starting player health
         currentHealth = maxHealth;
         currentDMG = baseDMG;
     }
@@ -21,7 +19,7 @@ public class PlayerCharacter : MonoBehaviour
     public void healHealth(float restoreAmount)
     {
         currentHealth += restoreAmount;
-        //prevents overheal
+        // Prevents overheal
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
@@ -30,4 +28,27 @@ public class PlayerCharacter : MonoBehaviour
         currentDMG += damageAmount;
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // Handle player death (e.g., respawn, game over)
+        Debug.Log("Player has died!");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Handle collision with traps
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            TakeDamage(10f); // Adjust the damage value as needed
+        }
+    }
 }

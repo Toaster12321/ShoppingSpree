@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     public float obstacleAvoidanceSpeed = 1f; // Speed to avoid obstacles
     public float maxHealth = 100f; // Maximum health of the enemy
     public float collisionDamage = 10f; // Damage taken when colliding with traps
+    public float playerDamage = 20f; // Damage dealt to the player
 
     private int currentPatrolIndex;
     private MovementState currentState;
@@ -80,6 +81,10 @@ public class EnemyMovement : MonoBehaviour
             Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
             MoveTowards(targetPosition, chaseSpeed);
         }
+        else
+        {
+            rb.linearVelocity = Vector3.zero; // Stop moving when close to the player
+        }
     }
 
     private void MoveTowards(Vector3 targetPosition, float speed)
@@ -128,6 +133,16 @@ public class EnemyMovement : MonoBehaviour
 
             // Take damage when colliding with traps
             TakeDamage(collisionDamage);
+        }
+
+        // Handle collision with player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerCharacter playerCharacter = collision.gameObject.GetComponent<PlayerCharacter>();
+            if (playerCharacter != null)
+            {
+                playerCharacter.TakeDamage(playerDamage);
+            }
         }
     }
 
