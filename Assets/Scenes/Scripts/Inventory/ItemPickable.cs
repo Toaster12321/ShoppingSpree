@@ -8,7 +8,7 @@ public class ItemPickable : MonoBehaviour, IPickable
     [SerializeField] private AudioClip pickUpSound;
     public void PickItem()
     {
-        SoundFXManager.instance.PlaySoundFXClip(pickUpSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(pickUpSound, transform, 0.5f);
         Destroy(gameObject);
     }
 }
