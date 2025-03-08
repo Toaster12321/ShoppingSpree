@@ -198,6 +198,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void NewItemSelected()
     {
+
         protein_item.SetActive(false);
         coffee_item.SetActive(false);
         milkcarton_item.SetActive(false);
