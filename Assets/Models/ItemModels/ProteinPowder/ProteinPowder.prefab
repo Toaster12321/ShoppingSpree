@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &468450
 Transform:
   m_ObjectHideFlags: 0
@@ -164,4 +164,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 84386da0e02700842a3ed93068734685, type: 2}
-  pickUpSound: {fileID: 8300000, guid: ba08b30e620fb9e449efc8f336d2c515, type: 3}
