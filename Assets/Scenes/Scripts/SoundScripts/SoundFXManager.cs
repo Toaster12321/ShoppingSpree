@@ -1,9 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
-public class SoundFXManager : MonoBehaviour
+public class SoundFXManager : MonoBehaviour, IGameManager
 {
+
+    //setter/getter function to be referenced for the volume slider in the settings script
+    public float soundVolume
+    {
+        get { return AudioListener.volume; }
+        set { AudioListener.volume = value; }
+    }
+    //setter/ getter for the manager status script
+    public ManagerStatus status { get; private set; }
+    //startup function needed to use IGameManager interface script
+    public void Startup()
+    {
+        Debug.Log("Audio Manager starting...");
+
+        //soundVolume acts as the global sound source
+        soundVolume = 0.5f;
+
+        status = ManagerStatus.Started;
+    }
 
     public static SoundFXManager instance;
     [SerializeField] private AudioSource soundFXObject;
@@ -27,7 +47,7 @@ public class SoundFXManager : MonoBehaviour
         audioSource.clip = audioClip[rand];
 
         //assign volume
-        audioSource.volume = volume;
+        audioSource.volume = soundVolume;
 
         //play sound
         audioSource.Play();
@@ -48,7 +68,7 @@ public class SoundFXManager : MonoBehaviour
         audioSource.clip = audioClip;
 
         //assign volume
-        audioSource.volume = volume;
+        audioSource.volume = soundVolume;
 
         //play sound
         audioSource.Play();
