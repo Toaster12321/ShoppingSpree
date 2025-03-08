@@ -18,16 +18,20 @@ public class EnemyMovement : MonoBehaviour
     public float stopDistance = 1f;
     public float obstacleAvoidanceRange = 2f; // Range to detect obstacles
     public float obstacleAvoidanceSpeed = 1f; // Speed to avoid obstacles
+    public float maxHealth = 100f; // Maximum health of the enemy
+    public float collisionDamage = 10f; // Damage taken when colliding with traps
 
     private int currentPatrolIndex;
     private MovementState currentState;
     private Rigidbody rb;
+    private float currentHealth;
 
     void Start()
     {
         currentState = MovementState.PATROLLING;
         currentPatrolIndex = 0;
         rb = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
         if (patrolPoints.Length > 0)
         {
             transform.position = patrolPoints[currentPatrolIndex].position;
@@ -115,12 +119,30 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Handle collision with obstacles
-        if (collision.gameObject.CompareTag("Obstacle"))
+        // Handle collision with traps
+        if (collision.gameObject.CompareTag("Trap"))
         {
             // Stop movement or adjust direction
             Vector3 direction = -collision.contacts[0].normal;
             rb.linearVelocity = direction * obstacleAvoidanceSpeed;
+
+            // Take damage when colliding with traps
+            TakeDamage(collisionDamage);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // Handle enemy death (e.g., play animation, destroy GameObject)
+        Destroy(gameObject);
     }
 }
