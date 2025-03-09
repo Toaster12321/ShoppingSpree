@@ -160,4 +160,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 00231c1f15141c9429423d6dd5792200, type: 2}
-  pickUpSound: {fileID: 8300000, guid: ba08b30e620fb9e449efc8f336d2c515, type: 3}
