@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class PlayerCharacter : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            //player dies and loads the title screen
             Die();
+            SceneManager.LoadSceneAsync(0);
         }
     }
 
