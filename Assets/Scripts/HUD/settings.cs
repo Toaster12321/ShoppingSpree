@@ -19,4 +19,9 @@ public class settings : MonoBehaviour
     {
         GlobalManager.Audio.soundVolume = volume;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
