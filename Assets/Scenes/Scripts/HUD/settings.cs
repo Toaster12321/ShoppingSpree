@@ -33,6 +33,9 @@ public class settings : MonoBehaviour
         SceneManager.LoadSceneAsync(0);
     }
 <<<<<<< Updated upstream:Assets/Scenes/Scripts/HUD/settings.cs
+<<<<<<< Updated upstream:Assets/Scenes/Scripts/HUD/settings.cs
+>>>>>>> Stashed changes:Assets/Scripts/HUD/settings.cs
+=======
 >>>>>>> Stashed changes:Assets/Scripts/HUD/settings.cs
 =======
 >>>>>>> Stashed changes:Assets/Scripts/HUD/settings.cs
