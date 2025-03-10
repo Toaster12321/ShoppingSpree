@@ -6,12 +6,14 @@ using UnityEngine;
 public class UIEvents : MonoBehaviour
 {
     [SerializeField] settings _settingsMenu;
+    [SerializeField] settings _VictoryScreen;
     private bool _gameActive;
 
     private void Start()
     {
         _gameActive = true;
         _settingsMenu.Close();
+        _VictoryScreen.Close();
         Time.timeScale = 1f;
     }
 
@@ -39,6 +41,8 @@ public class UIEvents : MonoBehaviour
             }
         }
 
+
+
     }
 
     //called when we open settings
@@ -55,6 +59,13 @@ public class UIEvents : MonoBehaviour
         _settingsMenu.Close();
         _gameActive = true;
         Time.timeScale = 1f;
+    }
+    public void OnVictoryScreen()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        _VictoryScreen.Open();
+        _gameActive = false;
+        Time.timeScale = 0.0f;
     }
 
 }

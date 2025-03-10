@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class settings : MonoBehaviour
 {
@@ -23,5 +24,10 @@ public class settings : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 }

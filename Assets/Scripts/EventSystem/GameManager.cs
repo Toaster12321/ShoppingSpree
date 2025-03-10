@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int enemyCount;
 
+    private UIEvents _uiEvents; //reference to the UI Event script for victory screen
+
     void Awake()
     {
         if (instance == null)
@@ -22,6 +24,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        GameObject sceneController = GameObject.Find("SceneController");
+
+        _uiEvents = sceneController.GetComponent<UIEvents>();
+
         // Initialize the enemy count
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
@@ -55,6 +61,10 @@ public class GameManager : MonoBehaviour
         // Display the victory screen
         Debug.Log("Victory! All enemies are dead.");
         // Load the victory scene or display the victory UI
+        if( _uiEvents != null)
+        {
+            _uiEvents.OnVictoryScreen();
+        }
         //ADD VICTORY SCENE HERE
     }
 }
