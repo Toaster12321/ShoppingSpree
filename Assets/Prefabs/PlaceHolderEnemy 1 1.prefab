@@ -148,7 +148,6 @@ MonoBehaviour:
   chaseSpeed: 4
   roamSpeed: 2
   chaseRange: 20
-  player: {fileID: 0}
   stopDistance: 1
   obstacleAvoidanceRange: 2
   obstacleAvoidanceSpeed: 1
@@ -156,6 +155,13 @@ MonoBehaviour:
   collisionDamage: 10
   playerDamage: 20
   roamTime: 5
+  enemyHurtSound:
+  - {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+  - {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+  - {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+  enemyDieSound:
+  - {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+  - {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
 --- !u!54 &3437000965147799207
 Rigidbody:
   m_ObjectHideFlags: 0

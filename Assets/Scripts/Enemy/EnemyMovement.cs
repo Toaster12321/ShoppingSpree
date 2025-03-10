@@ -22,6 +22,8 @@ public class EnemyMovement : MonoBehaviour
     public float collisionDamage = 10f; // Damage taken when colliding with traps
     public float playerDamage = 20f; // Damage dealt to the player
     public float roamTime = 5f; // Time to roam in one direction
+    [SerializeField] private AudioClip[] enemyHurtSound;
+    [SerializeField] private AudioClip[] enemyDieSound;
 
     private MovementState currentState;
     private Rigidbody rb;
@@ -178,6 +180,10 @@ public class EnemyMovement : MonoBehaviour
     {
         currentHealth -= damage;
         StartCoroutine(FlashRed());
+        //if (currentHealth > 0) {
+            SoundFXManager.instance.PlayRandomSoundFXClip(enemyHurtSound, transform, 1f);
+
+       // }
         if (currentHealth <= 0)
         {
             Die();
@@ -195,7 +201,7 @@ public class EnemyMovement : MonoBehaviour
     {
         // Notify the GameManager that this enemy has died
         GameManager.instance.EnemyDied();
-
+        //SoundFXManager.instance.PlayRandomSoundFXClip(enemyDieSound, transform, 1f);
         // Handle enemy death (e.g., play animation, destroy GameObject)
         Destroy(gameObject);
     }
