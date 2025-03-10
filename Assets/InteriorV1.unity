@@ -5846,6 +5846,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7580,6 +7628,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15815,6 +15911,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20380,6 +20524,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31166,6 +31358,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38751,6 +38991,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48614,6 +48902,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49621,6 +49957,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51514,6 +51898,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56632,6 +57064,11 @@ MonoBehaviour:
   currentHealth: 0
   baseDMG: 40
   currentDMG: 0
+  playerHit:
+  - {fileID: 8300000, guid: dad4b4bb959a7ff47919cf2cf166f911, type: 3}
+  - {fileID: 8300000, guid: ca032a6b63d21b34db3148fa2a23aee1, type: 3}
+  - {fileID: 8300000, guid: a4d54ac017c0e024aa25c05d036ba81f, type: 3}
+  loseSound: {fileID: 8300000, guid: cfed1b17a565f2e438b49268db2d2524, type: 3}
 --- !u!114 &2111768951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57844,6 +58281,54 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2111768956}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyDieSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: enemyHurtSound.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyDieSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: 'enemyHurtSound.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

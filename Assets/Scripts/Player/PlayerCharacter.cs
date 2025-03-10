@@ -10,6 +10,8 @@ public class PlayerCharacter : MonoBehaviour
     public float currentHealth;
     public float baseDMG = 10f;
     public float currentDMG;
+    [SerializeField] private AudioClip[] playerHit; 
+    [SerializeField] private AudioClip loseSound;
 
     void Start()
     {
@@ -33,10 +35,12 @@ public class PlayerCharacter : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        SoundFXManager.instance.PlayRandomSoundFXClip(playerHit, transform, 1f);
         if (currentHealth <= 0)
         {
                 //player dies and loads the title screen
             Die();
+            SoundFXManager.instance.PlaySoundFXClip(loseSound, transform, 1f);
             SceneManager.LoadSceneAsync(0);
         }
     }
