@@ -7,10 +7,12 @@ public class RayShooter : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private AudioClip raygunSound;
-    public float damage = 20f; // Damage dealt to the enemy
+    private PlayerCharacter _damageVar; // Damage dealt to the enemy
 
     void Start()
     {
+        _damageVar = GetComponent<PlayerCharacter>();
+        
         cam = GetComponentInChildren<Camera>();
         if (cam == null)
         {
@@ -55,7 +57,7 @@ public class RayShooter : MonoBehaviour
             Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
             // Create a ray whose starting point is the middle of the screen
             Ray ray = cam.ScreenPointToRay(point);
-            SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, 1f);
+            //SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, 1f);
             // Create a raycast object to figure out what was hit
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
@@ -67,7 +69,7 @@ public class RayShooter : MonoBehaviour
                 EnemyMovement enemy = hitObject.GetComponent<EnemyMovement>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(_damageVar.currentDMG);
                     Messenger.Broadcast(GameEvent.ENEMY_HIT);
                     // Debug.Log("Target hit!");
                 }
