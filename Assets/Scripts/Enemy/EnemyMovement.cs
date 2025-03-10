@@ -7,40 +7,57 @@ public class EnemyMovement : MonoBehaviour
     public enum MovementState
     {
         PATROLLING,
-        CHASING
+        CHASING,
+        ROAMING
     }
 
     public float patrolSpeed = 2f;
     public float chaseSpeed = 4f;
+    public float roamSpeed = 2f;
     public float chaseRange = 10f;
-    public Transform[] patrolPoints;
-    public Transform player;
     public float stopDistance = 1f;
     public float obstacleAvoidanceRange = 2f; // Range to detect obstacles
     public float obstacleAvoidanceSpeed = 1f; // Speed to avoid obstacles
     public float maxHealth = 100f; // Maximum health of the enemy
     public float collisionDamage = 10f; // Damage taken when colliding with traps
     public float playerDamage = 20f; // Damage dealt to the player
+    public float roamTime = 5f; // Time to roam in one direction
 
-    private int currentPatrolIndex;
     private MovementState currentState;
     private Rigidbody rb;
     private float currentHealth;
+    private float roamTimer;
+    private Vector3 roamDirection;
+    private Renderer enemyRenderer;
+    private Color originalColor;
+    private Transform player;
 
     void Start()
     {
-        currentState = MovementState.PATROLLING;
-        currentPatrolIndex = 0;
+        currentState = MovementState.ROAMING;
         rb = GetComponent<Rigidbody>();
+        enemyRenderer = GetComponent<Renderer>();
+        originalColor = enemyRenderer.material.color;
         currentHealth = maxHealth;
-        if (patrolPoints.Length > 0)
+        roamTimer = roamTime;
+        SetRandomRoamDirection();
+
+        // Find the player GameObject by tag
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
         {
-            transform.position = patrolPoints[currentPatrolIndex].position;
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Player object not found. Please ensure the player is tagged as 'Player'.");
         }
     }
 
     void Update()
     {
+        if (player == null) return;
+
         switch (currentState)
         {
             case MovementState.PATROLLING:
@@ -48,6 +65,9 @@ public class EnemyMovement : MonoBehaviour
                 break;
             case MovementState.CHASING:
                 ChasePlayer();
+                break;
+            case MovementState.ROAMING:
+                Roam();
                 break;
         }
 
@@ -57,21 +77,13 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (currentState == MovementState.CHASING && Vector3.Distance(transform.position, player.position) > chaseRange)
         {
-            currentState = MovementState.PATROLLING;
+            currentState = MovementState.ROAMING;
         }
     }
 
     private void Patrol()
     {
-        if (patrolPoints.Length == 0) return;
-
-        Transform targetPoint = patrolPoints[currentPatrolIndex];
-        MoveTowards(targetPoint.position, patrolSpeed);
-
-        if (Vector3.Distance(transform.position, targetPoint.position) < 0.1f)
-        {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-        }
+        // Implement patrol logic if needed
     }
 
     private void ChasePlayer()
@@ -85,6 +97,22 @@ public class EnemyMovement : MonoBehaviour
         {
             rb.linearVelocity = Vector3.zero; // Stop moving when close to the player
         }
+    }
+
+    private void Roam()
+    {
+        roamTimer -= Time.deltaTime;
+        if (roamTimer <= 0)
+        {
+            SetRandomRoamDirection();
+            roamTimer = roamTime;
+        }
+        MoveTowards(transform.position + roamDirection, roamSpeed);
+    }
+
+    private void SetRandomRoamDirection()
+    {
+        roamDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
     }
 
     private void MoveTowards(Vector3 targetPosition, float speed)
@@ -149,14 +177,25 @@ public class EnemyMovement : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        StartCoroutine(FlashRed());
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
+    private IEnumerator FlashRed()
+    {
+        enemyRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        enemyRenderer.material.color = originalColor;
+    }
+
     private void Die()
     {
+        // Notify the GameManager that this enemy has died
+        GameManager.instance.EnemyDied();
+
         // Handle enemy death (e.g., play animation, destroy GameObject)
         Destroy(gameObject);
     }

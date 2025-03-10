@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6fcd2d0ed406e4e0093d1f6f1bf7c603
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 2925
+  packageName: Simple Helvetica
+  packageVersion: 1.02
+  assetPath: Assets/Simple Helvetica/SimpleHelvetica.cs
+  uploadId: 27837

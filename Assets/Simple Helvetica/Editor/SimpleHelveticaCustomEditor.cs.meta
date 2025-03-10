@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: db6018bbf9d8345dfa08905b6c7bf186
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 2925
+  packageName: Simple Helvetica
+  packageVersion: 1.02
+  assetPath: Assets/Simple Helvetica/Editor/SimpleHelveticaCustomEditor.cs
+  uploadId: 27837

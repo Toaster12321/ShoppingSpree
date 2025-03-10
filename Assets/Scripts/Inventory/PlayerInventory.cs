@@ -34,6 +34,10 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] GameObject pickUpItem_gameobject;
     [SerializeField] GameObject inventoryFull_gameobject;
+    [SerializeField] private AudioClip[] useCoffeeSound; 
+    [SerializeField] private AudioClip[] useProteinSound; 
+    [SerializeField] private AudioClip[] useMilkSound; 
+
 
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
 
@@ -157,7 +161,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 _playerStats.healHealth(20);
             }
-
+            SoundFXManager.instance.PlayRandomSoundFXClip(useMilkSound, transform, 1f);
             inventoryList.RemoveAt(selectedItem);
 
             //fixes bug where out of range index is thrown 
@@ -170,6 +174,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 //20% increase to damage
                 _playerBuff.startBuff(20f, TempBuff.BuffType.Damage, 1.2f);
+                SoundFXManager.instance.PlayRandomSoundFXClip(useProteinSound, transform, 1f);
 
                 //start damage buff timer for 20s
                 Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
@@ -188,6 +193,7 @@ public class PlayerInventory : MonoBehaviour
                 _playerBuff.startBuff(20f, TempBuff.BuffType.Speed, 1.5f);
               
             }
+            SoundFXManager.instance.PlayRandomSoundFXClip(useCoffeeSound, transform, 1f);
 
             inventoryList.RemoveAt(selectedItem);
 
@@ -198,9 +204,9 @@ public class PlayerInventory : MonoBehaviour
 
     private void NewItemSelected()
     {
-        protein_item.SetActive(false);
-        coffee_item.SetActive(false);
-        milkcarton_item.SetActive(false);
+        if (protein_item != null) protein_item.SetActive(false);
+        if (coffee_item != null) coffee_item.SetActive(false);
+        if (milkcarton_item != null) milkcarton_item.SetActive(false);
 
         if (inventoryList.Count == 0)
             return;

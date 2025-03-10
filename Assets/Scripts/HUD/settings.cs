@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class settings : MonoBehaviour
 {
@@ -14,4 +15,19 @@ public class settings : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //function for changing volume with the slider
+    public void OnSoundVolume(float volume)
+    {
+        GlobalManager.Audio.soundVolume = volume;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }

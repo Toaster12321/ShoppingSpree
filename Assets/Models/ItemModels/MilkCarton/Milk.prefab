@@ -152,3 +152,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: 9a78811d83241f34da46b76b59ba1541, type: 2}
+  pickUpSound: {fileID: 8300000, guid: ba08b30e620fb9e449efc8f336d2c515, type: 3}
