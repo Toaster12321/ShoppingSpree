@@ -16,7 +16,7 @@ public class FPSInput : MonoBehaviour
     private CharacterController characterController;
 
 
-    public const float _baseSpeed = 5f;
+    public const float _baseSpeed = 10f;
 
     //serialize field allows a private var to be able to be viewed in the editor
     [SerializeField] private MovementState _movementState;
