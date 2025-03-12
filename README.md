@@ -6,7 +6,7 @@ Antonio Crawford(Toaster12321)- Inventory System, UI, Interactable Objects, Play
 Connor Lahm(Clahm21)- Level Design, 3D Level Assets with Collision
 Jason Huang(GoblinJay)-Enemy Design, Enemy Assets, Level Design, Enemy Scripts, Victory/Lose Condition
 Doug Fry(dogfryd)-Sound Design, Sound Manager, Sound Implementation
-Anthony Arocha- General Design Choices (unknown contribution)
+Anthony Arocha- General Design Choices
 
 Unity Version 6000.0.36f1
 
