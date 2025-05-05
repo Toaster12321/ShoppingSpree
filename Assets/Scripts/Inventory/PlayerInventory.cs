@@ -30,6 +30,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject protein_item;
     [SerializeField] GameObject coffee_item;
     [SerializeField] GameObject milkcarton_item;
+    [SerializeField] GameObject banana_item;
 
     [SerializeField] Camera cam;
     [SerializeField] GameObject pickUpItem_gameobject;
@@ -52,6 +53,7 @@ public class PlayerInventory : MonoBehaviour
         itemSetActive.Add(itemType.protein_powder, protein_item);
         itemSetActive.Add(itemType.coffee, coffee_item);
         itemSetActive.Add(itemType.milk_carton, milkcarton_item);
+        itemSetActive.Add(itemType.banana, banana_item);
 
         NewItemSelected();
 
