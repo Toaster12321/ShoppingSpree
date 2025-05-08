@@ -12,7 +12,7 @@ public class RayShooter : MonoBehaviour
     void Start()
     {
         _damageVar = GetComponent<PlayerCharacter>();
-        
+
         cam = GetComponentInChildren<Camera>();
         if (cam == null)
         {
@@ -24,15 +24,7 @@ public class RayShooter : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void OnGUI()
-    {
-        if (cam == null) return;
 
-        int size = 24;
-        float posX = cam.pixelWidth / 2 - size / 4;
-        float posY = cam.pixelHeight / 2 - size / 2;
-        GUI.Label(new Rect(posX, posY, size, size), "+");
-    }
 
     private IEnumerator SphereIndicator(Vector3 pos)
     {
@@ -40,6 +32,7 @@ public class RayShooter : MonoBehaviour
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         // Place sphere at pos passed in
         sphere.transform.position = pos;
+        sphere.transform.localScale = Vector3.one * 0.1f;
 
         // Wait
         yield return new WaitForSeconds(1);
