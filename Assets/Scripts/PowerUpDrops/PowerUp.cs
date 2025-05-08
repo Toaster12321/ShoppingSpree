@@ -29,5 +29,6 @@ public class PowerUp : MonoBehaviour
         }
 
         Destroy(gameObject); // get rid of power up
+ 
     }
 }
