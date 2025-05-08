@@ -4,13 +4,7 @@ public class PowerUp : MonoBehaviour
 {
     public GameObject pickupEffect;
     public GameObject item;
-    private PlayerCharacter _playerStats;
 
-    void Start()
-    {
-        _playerStats = GetComponent<PlayerCharacter>();
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) //only player can pick up
@@ -23,6 +17,7 @@ public class PowerUp : MonoBehaviour
     {
         Instantiate(pickupEffect, transform.position, transform.rotation);
         //Debug.Log("power up picked up");
+        PlayerCharacter _playerStats = player.GetComponent<PlayerCharacter>();
         string itemName = item.name;
         if (itemName == "HealthDrop")
         {
