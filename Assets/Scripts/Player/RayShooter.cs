@@ -53,26 +53,36 @@ public class RayShooter : MonoBehaviour
         // When the player left-clicks, perform a raycast
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            // Calculate the center of the screen
-            Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
-            // Create a ray whose starting point is the middle of the screen
-            Ray ray = cam.ScreenPointToRay(point);
-            SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, .5f);
-            // Create a raycast object to figure out what was hit
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            Shoot();
+        }
+    }
+    
+    /// <summary>
+    /// Public method to fire the weapon that can be called from inventory items
+    /// </summary>
+    public void Shoot()
+    {
+        if (cam == null) return;
+        
+        // Calculate the center of the screen
+        Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
+        // Create a ray whose starting point is the middle of the screen
+        Ray ray = cam.ScreenPointToRay(point);
+        SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, .5f);
+        // Create a raycast object to figure out what was hit
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // For now, print out the coords of where the ray hit
+            Debug.Log("Hit: " + hit.point);
+            // If object was reactive target
+            GameObject hitObject = hit.transform.gameObject;
+            EnemyMovement enemy = hitObject.GetComponent<EnemyMovement>();
+            if (enemy != null)
             {
-                // For now, print out the coords of where the ray hit
-                Debug.Log("Hit: " + hit.point);
-                // If object was reactive target
-                GameObject hitObject = hit.transform.gameObject;
-                EnemyMovement enemy = hitObject.GetComponent<EnemyMovement>();
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(_damageVar.currentDMG);
-                    Messenger.Broadcast(GameEvent.ENEMY_HIT);
-                    // Debug.Log("Target hit!");
-                }
+                enemy.TakeDamage(_damageVar.currentDMG);
+                Messenger.Broadcast(GameEvent.ENEMY_HIT);
+                // Debug.Log("Target hit!");
             }
         }
     }
