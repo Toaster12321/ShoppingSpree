@@ -155,6 +155,9 @@ MonoBehaviour:
   collisionDamage: 10
   playerDamage: 20
   roamTime: 5
+  itemTable:
+  - item: {fileID: 4753764377832728096, guid: 6cbc76a1484974142bafa3893f825ee1, type: 3}
+    dropChance: 20
   enemyHurtSound:
   - {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
   - {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}

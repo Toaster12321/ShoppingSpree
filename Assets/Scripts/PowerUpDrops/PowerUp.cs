@@ -4,6 +4,7 @@ public class PowerUp : MonoBehaviour
 {
     public GameObject pickupEffect;
     public GameObject item;
+    //add sound FX here
 
     private void OnTriggerEnter(Collider other)
     {

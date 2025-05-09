@@ -22,6 +22,11 @@ public class EnemyMovement : MonoBehaviour
     public float collisionDamage = 10f; // Damage taken when colliding with traps
     public float playerDamage = 20f; // Damage dealt to the player
     public float roamTime = 5f; // Time to roam in one direction
+
+    [Header("Loot")]
+    public List<ItemDropper> itemTable = new List<ItemDropper> (); //item drop table
+
+    [Header("Sound")]
     [SerializeField] private AudioClip[] enemyHurtSound;
     [SerializeField] private AudioClip[] enemyDieSound;
 
@@ -201,8 +206,29 @@ public class EnemyMovement : MonoBehaviour
     {
         // Notify the GameManager that this enemy has died
         GameManager.instance.EnemyDied();
-        //SoundFXManager.instance.PlayRandomSoundFXClip(enemyDieSound, transform, 1f);
+        SoundFXManager.instance.PlayRandomSoundFXClip(enemyDieSound, transform, 1f);
         // Handle enemy death (e.g., play animation, destroy GameObject)
+
+        //loop each item in table to roll for drop
+        foreach(ItemDropper lootItem in itemTable)
+        {
+            if(Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                InstantiateItem(lootItem.item);
+            }
+            break; // breaks after 1 item is found, if any is found
+        }
+
         Destroy(gameObject);
+    }
+
+    //function to load item
+    void InstantiateItem(GameObject item)
+    {
+        if(item)
+        {
+            GameObject droppedItem = Instantiate(item, transform.position, Quaternion.identity);
+            
+        }
     }
 }
