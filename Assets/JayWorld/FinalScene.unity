@@ -45307,7 +45307,7 @@ PrefabInstance:
       objectReference: {fileID: 4753764377832728096, guid: 6cbc76a1484974142bafa3893f825ee1, type: 3}
     - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
       propertyPath: itemTable.Array.data[0].dropChance
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80684,6 +80684,10 @@ PrefabInstance:
       propertyPath: 'enemyHurtSound.Array.data[5]'
       value: 
       objectReference: {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+    - target: {fileID: 5746740027096949436, guid: 65fa637150ca8074da5fa8a2bd8a6303, type: 3}
+      propertyPath: itemTable.Array.data[0].dropChance
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
