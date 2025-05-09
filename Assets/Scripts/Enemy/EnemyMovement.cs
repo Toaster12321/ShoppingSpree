@@ -33,13 +33,33 @@ public class EnemyMovement : MonoBehaviour
     private Renderer enemyRenderer;
     private Color originalColor;
     private Transform player;
+    private Transform visualModel; // Reference to the child model
 
     void Start()
     {
         currentState = MovementState.ROAMING;
         rb = GetComponent<Rigidbody>();
-        enemyRenderer = GetComponent<Renderer>();
-        originalColor = enemyRenderer.material.color;
+        
+        // Find the visual model (first child)
+        if (transform.childCount > 0)
+        {
+            visualModel = transform.GetChild(0);
+            // Get the renderer from the visual model
+            enemyRenderer = visualModel.GetComponent<Renderer>();
+            if (enemyRenderer != null)
+            {
+                originalColor = enemyRenderer.material.color;
+            }
+            else
+            {
+                Debug.LogWarning("No Renderer found on the child object. FlashRed will not work.");
+            }
+        }
+        else
+        {
+            Debug.LogError("This enemy has no child objects! Please add a model as a child with a Renderer component.");
+        }
+        
         currentHealth = maxHealth;
         roamTimer = roamTime;
         SetRandomRoamDirection();
@@ -192,9 +212,16 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator FlashRed()
     {
-        enemyRenderer.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        enemyRenderer.material.color = originalColor;
+        if (enemyRenderer != null)
+        {
+            enemyRenderer.material.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            enemyRenderer.material.color = originalColor;
+        }
+        else
+        {
+            yield return null; // Just wait a frame if no renderer
+        }
     }
 
     private void Die()
