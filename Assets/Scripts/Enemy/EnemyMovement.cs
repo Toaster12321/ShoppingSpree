@@ -56,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
     private bool isStuck = false;
     private int failedPathAttempts = 0;
     private Vector3 lastTargetPosition;
-    
+
     void Start()
     {
         currentState = MovementState.PATROLLING;
@@ -73,14 +73,14 @@ public class EnemyMovement : MonoBehaviour
         enemyRenderer = GetComponent<Renderer>();
         if (enemyRenderer != null)
         {
-            originalColor = enemyRenderer.material.color;
+        originalColor = enemyRenderer.material.color;
         }
         
         currentHealth = maxHealth;
         initialPosition = transform.position;
         lastPosition = transform.position;
         stuckCheckTimer = stuckCheckInterval;
-        
+
         // Find the player
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
@@ -124,7 +124,7 @@ public class EnemyMovement : MonoBehaviour
     private void UpdateState()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        
+
         // Only change to CHASING if we have line of sight
         if (distanceToPlayer <= chaseRange && HasLineOfSightToPlayer())
         {
@@ -292,7 +292,7 @@ public class EnemyMovement : MonoBehaviour
             maxDistance = hit.distance;
             if (showDebugRays)
                 Debug.DrawRay(transform.position, moveDirection * hit.distance, Color.red, 0.2f);
-        }
+    }
         else
         {
             maxDistance = obstacleDetectionRange;
@@ -303,7 +303,7 @@ public class EnemyMovement : MonoBehaviour
         
         // Cast rays in a circle around the main direction
         for (int i = 0; i < obstacleAvoidanceSensors; i++)
-        {
+    {
             float angle = (i / (float)obstacleAvoidanceSensors) * 360f;
             Vector3 direction = Quaternion.Euler(0, angle, 0) * moveDirection;
             
@@ -432,10 +432,10 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator FlashRed()
     {
         if (enemyRenderer != null)
-        {
-            enemyRenderer.material.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            enemyRenderer.material.color = originalColor;
+    {
+        enemyRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        enemyRenderer.material.color = originalColor;
         }
         else
         {

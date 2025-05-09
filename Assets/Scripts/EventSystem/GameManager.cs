@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     
     [Header("References")]
     public GameObject defaultEnemyPrefab; // Optional fallback enemy prefab
-    
+
     private UIEvents _uiEvents; //reference to the UI Event script for victory screen
     private Dictionary<string, GameObject> enemyPrefabs = new Dictionary<string, GameObject>();
 
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         if (sceneController != null)
         {
-            _uiEvents = sceneController.GetComponent<UIEvents>();
+        _uiEvents = sceneController.GetComponent<UIEvents>();
         }
 
         // Initialize the enemy count
