@@ -66,11 +66,6 @@ public class RayShooter : MonoBehaviour
                     Messenger.Broadcast(GameEvent.ENEMY_HIT);
                     // Debug.Log("Target hit!");
                 }
-                else
-                {
-                    // Create sphere
-                    StartCoroutine(SphereIndicator(hit.point));
-                }
             }
         }
     }

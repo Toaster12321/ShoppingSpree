@@ -23,7 +23,7 @@ public class settings : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        ReturnToMainMenu();
     }
 
     public void ReturnToMainMenu()

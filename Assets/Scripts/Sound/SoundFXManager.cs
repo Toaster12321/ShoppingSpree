@@ -20,7 +20,7 @@ public class SoundFXManager : MonoBehaviour, IGameManager
         Debug.Log("Audio Manager starting...");
 
         //soundVolume acts as the global sound source
-        soundVolume = 0.3f;
+        soundVolume = 0.25f;
 
         status = ManagerStatus.Started;
     }
