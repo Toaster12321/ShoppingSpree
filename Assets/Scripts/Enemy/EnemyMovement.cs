@@ -215,8 +215,9 @@ public class EnemyMovement : MonoBehaviour
             if(Random.Range(0f, 100f) <= lootItem.dropChance)
             {
                 InstantiateItem(lootItem.item);
+                break; // breaks after 1 item is found, if any is found
             }
-            break; // breaks after 1 item is found, if any is found
+           
         }
 
         Destroy(gameObject);
