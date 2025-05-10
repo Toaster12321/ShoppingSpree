@@ -56,15 +56,14 @@ public class Flashlight : MonoBehaviour
         // Enhance light settings for better visibility
         ConfigureFlashlightSettings();
         
-        // Don't automatically disable the light - wait for direct control
-        // Let the item system control the initial state
-        // We'll keep the light disabled initially, but let the FlashlightItem turn it on
+        // Ensure the flashlight is OFF initially
         isOn = false;
         
-        // Make sure the light is enabled/disabled based on isOn
+        // Make sure the light is disabled
         if (spotLight != null)
         {
-            spotLight.enabled = isOn;
+            spotLight.enabled = false;
+            Debug.Log("Flashlight initialized in OFF state");
         }
     }
     
@@ -111,6 +110,8 @@ public class Flashlight : MonoBehaviour
         if (allowInput && Input.GetKeyDown(toggleKey))
         {
             ToggleFlashlight();
+            // Add debug message to show correct key was used
+            Debug.Log($"Flashlight toggled with {toggleKey} key");
         }
         
         // Handle battery drain and recharge

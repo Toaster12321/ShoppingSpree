@@ -224,6 +224,8 @@ public class NotificationManager : MonoBehaviour
         if (interactionPromptPanel != null && interactionPromptText != null)
         {
             interactionPromptText.text = $"Press E to {action}";
+            // Ensure we use the default color for generic prompts
+            interactionPromptText.color = Color.white;
             interactionPromptPanel.SetActive(true);
         }
         else if (debugMode)
@@ -240,6 +242,12 @@ public class NotificationManager : MonoBehaviour
         if (interactionPromptPanel != null)
         {
             interactionPromptPanel.SetActive(false);
+            
+            // Reset the text color to white when hiding the prompt
+            if (interactionPromptText != null)
+            {
+                interactionPromptText.color = Color.white;
+            }
         }
     }
     
@@ -256,7 +264,9 @@ public class NotificationManager : MonoBehaviour
         switch (itemType.ToLower())
         {
             case "flashlight":
-                currentTutorial = StartCoroutine(ShowTutorialMessage("Press F to toggle flashlight on/off"));
+                // Don't show the top notification for flashlight, rely on the bottom prompt instead
+                // The flashlight item will show the proper prompt when selected
+                Debug.Log("Flashlight picked up - using bottom prompt only");
                 break;
             case "weapon":
                 currentTutorial = StartCoroutine(ShowTutorialMessage("Left Click to attack with weapon"));
@@ -330,5 +340,68 @@ public class NotificationManager : MonoBehaviour
             interactionPromptPanel.SetActive(false);
             
         Debug.Log("All UI elements reset and hidden");
+    }
+    
+    /// <summary>
+    /// Shows a specialized flashlight pickup prompt using the interaction prompt panel
+    /// </summary>
+    public void ShowFlashlightPickupPrompt()
+    {
+        if (interactionPromptPanel != null && interactionPromptText != null)
+        {
+            // Make the text more distinctive with additional characters
+            interactionPromptText.text = ">> GRAB FLASHLIGHT: Press E <<";
+            // Use the highlight color to make it stand out
+            interactionPromptText.color = highlightColor;
+            interactionPromptPanel.SetActive(true);
+            
+            // Force the UI to update
+            if (interactionPromptText.gameObject.activeInHierarchy)
+            {
+                Canvas.ForceUpdateCanvases();
+            }
+            
+            // Call the fix text method to ensure it's visible
+            EnsureInteractionTextIsVisible();
+        }
+        else if (debugMode)
+        {
+            Debug.LogWarning("NotificationManager: Interaction prompt UI elements not assigned for flashlight pickup.");
+        }
+    }
+    
+    /// <summary>
+    /// Ensures that the interaction text is visible and properly colored
+    /// </summary>
+    [ContextMenu("Fix Interaction Text")]
+    public void EnsureInteractionTextIsVisible()
+    {
+        if (interactionPromptText != null)
+        {
+            // Make sure the text is visible with these strong settings
+            interactionPromptText.color = new Color(1f, 1f, 0f, 1f); // Bright yellow
+            interactionPromptText.fontSize = 24; // Larger font size
+            interactionPromptText.fontStyle = TMPro.FontStyles.Bold; // Bold text
+            
+            // Force material update
+            interactionPromptText.ForceMeshUpdate(true);
+            
+            // Log that we tried to fix it
+            Debug.Log("NotificationManager: Applied high-visibility text settings to interaction text!");
+        }
+        else
+        {
+            Debug.LogError("NotificationManager: Cannot fix interaction text - text component is null!");
+        }
+    }
+    
+    /// <summary>
+    /// Test function to manually show the flashlight pickup prompt
+    /// </summary>
+    [ContextMenu("Test Flashlight Pickup Text")]
+    public void TestFlashlightPickupText()
+    {
+        ShowFlashlightPickupPrompt();
+        Debug.Log("Manually triggered flashlight pickup text - should now be visible");
     }
 } 

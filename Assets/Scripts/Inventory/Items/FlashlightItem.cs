@@ -97,11 +97,14 @@ public class FlashlightItem : Item
             // Position the flashlight correctly
             PositionFlashlight();
             
-            // Force the light to be on when selected for visibility
-            if (!flashlightComponent.isOn)
+            // Keep the flashlight OFF when first selected (removing auto-on behavior)
+            if (flashlightComponent.isOn)
             {
-                flashlightComponent.ToggleFlashlight();
-                Debug.Log("Flashlight turned ON when selected");
+                Debug.Log("Flashlight is already ON when selected");
+            }
+            else
+            {
+                Debug.Log("Flashlight is OFF when selected (default state)");
             }
             
             // Debug log showing light properties
@@ -117,7 +120,7 @@ public class FlashlightItem : Item
                 Debug.LogError("Flashlight component has no spotlight reference!");
             }
             
-            // Show the usage prompt
+            // Show the usage prompt at the bottom of the screen
             if (NotificationManager.Instance != null)
             {
                 NotificationManager.Instance.ShowItemUsePrompt("Flashlight", "F");
@@ -148,45 +151,10 @@ public class FlashlightItem : Item
     
     public override void OnUse()
     {
-        Debug.Log("Attempting to toggle flashlight...");
+        // Don't show any additional notification since we already have the bottom prompt
+        Debug.Log("FlashlightItem: E pressed, but not showing additional notifications since bottom prompt is present");
         
-        // Only use the normal flashlight - no need for fallback now
-        if (flashlightComponent != null)
-        {
-            // Make sure gameObjects are active
-            if (!flashlightComponent.gameObject.activeSelf)
-            {
-                flashlightComponent.gameObject.SetActive(true);
-                Debug.Log("Activated flashlight GameObject that was inactive during OnUse");
-            }
-            
-            if (flashlightComponent.spotLight != null && !flashlightComponent.spotLight.gameObject.activeSelf)
-            {
-                flashlightComponent.spotLight.gameObject.SetActive(true);
-                Debug.Log("Activated spotlight GameObject that was inactive during OnUse");
-            }
-            
-            // Force the position update in case it moved
-            PositionFlashlight();
-            
-            // Toggle the light
-            flashlightComponent.ToggleFlashlight();
-            
-            // Get current state after toggle
-            bool isOn = flashlightComponent.isOn;
-            Debug.Log($"Flashlight toggled to: {(isOn ? "ON" : "OFF")}");
-            
-            // Show feedback
-            if (NotificationManager.Instance != null)
-            {
-                string message = isOn ? "Flashlight ON" : "Flashlight OFF";
-                NotificationManager.Instance.ShowNotification(message, 1f);
-            }
-        }
-        else
-        {
-            Debug.LogError("FlashlightItem: No Flashlight component found when trying to use!");
-        }
+        // No action is taken when E is pressed for the flashlight
     }
     
     public override void OnItemUpdate()

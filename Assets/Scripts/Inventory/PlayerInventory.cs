@@ -134,8 +134,19 @@ public class PlayerInventory : MonoBehaviour
                     return;
                 }
                 
-                // Shows pickup text
-                pickUpItem_gameobject.SetActive(true);
+                // Check if it's the flashlight (don't show our pickup text for flashlight)
+                ItemPickable pickable = hitInfo.collider.GetComponent<ItemPickable>();
+                if (pickable != null && pickable.itemScriptableObject != null && 
+                    pickable.itemScriptableObject.item_type == itemType.flashlight)
+                {
+                    // Let the FlashlightPickable handle this with NotificationManager
+                    pickUpItem_gameobject.SetActive(false);
+                }
+                else
+                {
+                    // Shows pickup text for non-flashlight items
+                    pickUpItem_gameobject.SetActive(true);
+                }
                 
                 if (Input.GetKey(pickItemKey))
                 {

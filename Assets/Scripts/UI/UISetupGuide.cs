@@ -91,18 +91,124 @@ public class UISetupGuide : MonoBehaviour
         promptText.fontSize = 20;
         promptText.text = "Press F to use Flashlight";
         
+        // Create interaction prompt panel (positioned above the item use prompt)
+        GameObject interactionPanel = new GameObject("InteractionPromptPanel");
+        interactionPanel.transform.SetParent(mainCanvas.transform, false);
+        RectTransform interactionRect = interactionPanel.AddComponent<RectTransform>();
+        interactionRect.anchorMin = new Vector2(0.5f, 0.15f); // Position above item use prompt
+        interactionRect.anchorMax = new Vector2(0.5f, 0.15f);
+        interactionRect.pivot = new Vector2(0.5f, 0);
+        interactionRect.sizeDelta = new Vector2(400, 50);
+        
+        // Add Background Image
+        Image interactionBg = interactionPanel.AddComponent<Image>();
+        interactionBg.color = new Color(0, 0, 0, 0.8f);
+        
+        // Create interaction text
+        GameObject interactionTextObject = new GameObject("InteractionText");
+        interactionTextObject.transform.SetParent(interactionPanel.transform, false);
+        RectTransform interactionTextRect = interactionTextObject.AddComponent<RectTransform>();
+        interactionTextRect.anchorMin = Vector2.zero;
+        interactionTextRect.anchorMax = Vector2.one;
+        interactionTextRect.offsetMin = new Vector2(5, 5);
+        interactionTextRect.offsetMax = new Vector2(-5, -5);
+        
+        // Add TextMeshProUGUI component
+        TextMeshProUGUI interactionText = interactionTextObject.AddComponent<TextMeshProUGUI>();
+        interactionText.alignment = TextAlignmentOptions.Center;
+        interactionText.fontSize = 20;
+        interactionText.text = "Press E to interact";
+        interactionText.color = Color.yellow; // Set to yellow by default for better visibility
+        
         // Connect everything to notification manager
         notificationManager.notificationText = text;
         notificationManager.notificationPanel = notificationPanel;
         notificationManager.backgroundPanel = bgImage;
         notificationManager.itemUsePromptPanel = promptPanel;
         notificationManager.itemUsePromptText = promptText;
+        notificationManager.interactionPromptPanel = interactionPanel; // Add the interaction panel reference
+        notificationManager.interactionPromptText = interactionText;   // Add the interaction text reference
         
         // Set initial state
         notificationPanel.SetActive(false);
         promptPanel.SetActive(false);
+        interactionPanel.SetActive(false); // Make sure it's hidden by default
         
         Debug.Log("Notification system created successfully!");
+    }
+
+    [MenuItem("GameObject/UI/Fix Interaction Prompt")]
+    public static void FixInteractionPrompt()
+    {
+        // Find the notification manager
+        NotificationManager notificationManager = Object.FindObjectOfType<NotificationManager>();
+        if (notificationManager == null)
+        {
+            Debug.LogError("NotificationManager not found in the scene!");
+            return;
+        }
+        
+        // Find or create main canvas
+        Canvas mainCanvas = Object.FindObjectOfType<Canvas>();
+        if (mainCanvas == null)
+        {
+            Debug.LogError("Canvas not found in the scene!");
+            return;
+        }
+        
+        // Create a new interaction panel if it doesn't exist
+        if (notificationManager.interactionPromptPanel == null)
+        {
+            // Create interaction prompt panel
+            GameObject interactionPanel = new GameObject("InteractionPromptPanel");
+            interactionPanel.transform.SetParent(mainCanvas.transform, false);
+            RectTransform interactionRect = interactionPanel.AddComponent<RectTransform>();
+            interactionRect.anchorMin = new Vector2(0.5f, 0.15f);
+            interactionRect.anchorMax = new Vector2(0.5f, 0.15f);
+            interactionRect.pivot = new Vector2(0.5f, 0);
+            interactionRect.sizeDelta = new Vector2(400, 50);
+            
+            // Add Background Image
+            Image interactionBg = interactionPanel.AddComponent<Image>();
+            interactionBg.color = new Color(0, 0, 0, 0.8f);
+            
+            // Create interaction text
+            GameObject interactionTextObject = new GameObject("InteractionText");
+            interactionTextObject.transform.SetParent(interactionPanel.transform, false);
+            RectTransform interactionTextRect = interactionTextObject.AddComponent<RectTransform>();
+            interactionTextRect.anchorMin = Vector2.zero;
+            interactionTextRect.anchorMax = Vector2.one;
+            interactionTextRect.offsetMin = new Vector2(5, 5);
+            interactionTextRect.offsetMax = new Vector2(-5, -5);
+            
+            // Add TextMeshProUGUI component
+            TextMeshProUGUI interactionText = interactionTextObject.AddComponent<TextMeshProUGUI>();
+            interactionText.alignment = TextAlignmentOptions.Center;
+            interactionText.fontSize = 20;
+            interactionText.text = "Press E to interact";
+            interactionText.color = Color.yellow; // Use yellow to make it visible
+            
+            // Connect to notification manager
+            notificationManager.interactionPromptPanel = interactionPanel;
+            notificationManager.interactionPromptText = interactionText;
+            
+            // Set initial state
+            interactionPanel.SetActive(false);
+            
+            Debug.Log("Interaction prompt fixed and assigned to NotificationManager!");
+        }
+        else
+        {
+            // If it exists but the text is not visible, fix the text
+            if (notificationManager.interactionPromptText != null)
+            {
+                // Reset text and make sure it's visible
+                notificationManager.interactionPromptText.text = ">> GRAB FLASHLIGHT: Press E <<";
+                notificationManager.interactionPromptText.color = Color.yellow;
+                notificationManager.interactionPromptText.fontSize = 20;
+                Debug.Log("Updated interaction prompt text settings!");
+            }
+        }
     }
 }
 #endif 

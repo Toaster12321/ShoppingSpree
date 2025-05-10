@@ -19,7 +19,7 @@ public class DoorController : MonoBehaviour
     [Header("Interaction")]
     public float interactionDistance = 5f;  // How close player must be to interact
     [Tooltip("Message shown when player has enough points to open the door")]
-    public string openMessage = "Press \"E\" to unlock";  // Message when player has enough points
+    public string openMessage = "Press E to interact";  // Message when player has enough points
     [Tooltip("Message shown when player doesn't have enough points (use {0} for required points)")]
     public string lockedMessage = "Not enough points! ({0})";  // Message when player doesn't have enough (with points needed)
     
@@ -425,9 +425,9 @@ public class DoorController : MonoBehaviour
             // Reset message formats to defaults
             bool changed = false;
             
-            if (door.openMessage != "Press \"E\" to unlock")
+            if (door.openMessage != "Press E to interact")
             {
-                door.openMessage = "Press \"E\" to unlock";
+                door.openMessage = "Press E to interact";
                 changed = true;
             }
             
@@ -616,9 +616,9 @@ public class DoorController : MonoBehaviour
         }
         
         // Check the open message
-        if (openMessage != "Press \"E\" to unlock")
+        if (openMessage != "Press E to interact")
         {
-            openMessage = "Press \"E\" to unlock";
+            openMessage = "Press E to interact";
             Debug.LogWarning($"Door {gameObject.name} - Open message was incorrect, reset to default");
         }
         
