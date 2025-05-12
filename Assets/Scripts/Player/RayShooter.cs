@@ -77,6 +77,14 @@ public class RayShooter : MonoBehaviour
                     StartCoroutine(SphereIndicator(hit.point));
                 }
             }
+            FlyingBananaAI bananaEnemy = hitObject.GetComponent<FlyingBananaAI>(); 
+            if (bananaEnemy != null)
+            {
+                
+                bananaEnemy.TakeDamage((int)_damageVar.currentDMG);
+                Messenger.Broadcast(GameEvent.ENEMY_HIT);
+                Debug.Log("Hit a Flying Banana!"); 
+            }
         }
     }
 }
