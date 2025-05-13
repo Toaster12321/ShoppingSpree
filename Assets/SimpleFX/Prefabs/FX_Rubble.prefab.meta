@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7904355fdf7fdcb4ebc3dca81eb5890e
+timeCreated: 1496248181
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67834
+  packageName: Simple FX - Cartoon Particles
+  packageVersion: 1.2
+  assetPath: Assets/SimpleFX/Prefabs/FX_Rubble.prefab
+  uploadId: 615759
