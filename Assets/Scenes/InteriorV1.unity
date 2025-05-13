@@ -3875,6 +3875,7 @@ GameObject:
   - component: {fileID: 140465630}
   - component: {fileID: 140465629}
   - component: {fileID: 140465628}
+  - component: {fileID: 140465631}
   m_Layer: 0
   m_Name: Game Managers
   m_TagString: Untagged
@@ -3924,6 +3925,19 @@ Transform:
   - {fileID: 257314207}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &140465631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140465627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c8c51752984d24183aa6502e945dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugPointsToAdd: 100
 --- !u!1 &142516704
 GameObject:
   m_ObjectHideFlags: 0
@@ -7970,6 +7984,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1463c5f109bc7c8468ce73ba8c811c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableKillAllWinCondition: 0
+  enableEnemyRespawn: 0
+  respawnDelay: 3
+  defaultEnemyPrefab: {fileID: 0}
 --- !u!4 &257314207
 Transform:
   m_ObjectHideFlags: 0
@@ -55477,6 +55495,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988157138}
   m_Mesh: {fileID: 4300124, guid: 83e5ddd5977f64451bf5d8f291b767be, type: 3}
+--- !u!1001 &1988965703
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.9068012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -29.338118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178637395255176150, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7553790026160894316, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
+      propertyPath: m_Name
+      value: banana
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e395b36d67c88f49a79a071030ee295, type: 3}
 --- !u!1 &1996573577
 GameObject:
   m_ObjectHideFlags: 0
@@ -58271,8 +58346,10 @@ MonoBehaviour:
   inventoryList: 
   selectedItem: 0
   playerReach: 5
+  itemHoldTransform: {fileID: 0}
   throwItemAway: 113
   pickItemKey: 101
+  useItemKey: 101
   inventorySlotImage:
   - {fileID: 357194277}
   - {fileID: 4385090}
@@ -58281,6 +58358,8 @@ MonoBehaviour:
   protein_item: {fileID: 164070, guid: 4df3b231b76808d439e018f3b2abce25, type: 3}
   coffee_item: {fileID: 7377654114505477542, guid: d6c066d60b1023446acd56c450909887, type: 3}
   milkcarton_item: {fileID: 1586293043813886440, guid: 0ada2d68def3d514b993b091d52a3015, type: 3}
+  flashlight_item: {fileID: 0}
+  weapon_item: {fileID: 0}
   cam: {fileID: 1382203112}
   pickUpItem_gameobject: {fileID: 1889112105}
   inventoryFull_gameobject: {fileID: 1604989864}
@@ -59573,3 +59652,4 @@ SceneRoots:
   - {fileID: 1824258518}
   - {fileID: 1805126391}
   - {fileID: 1085956778}
+  - {fileID: 1988965703}
