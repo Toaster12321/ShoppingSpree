@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee317c3b156c374ea19a4c30a20c65b, type: 3}
+  m_Name: FlashlightItem
+  m_EditorClassIdentifier: 
+  id: flashlight
+  item_type: 3
+  icon: {fileID: 21300000, guid: 6bcfeab41c635f84fa3b4bf485df5c03, type: 3}
+  isConsumable: 0
+  itemPrefab: {fileID: 2384058068390001082, guid: 5d84a24908960d14baaf25ccd40f7c02, type: 3}
+  description: A flashlight to illuminate dark areas. Press F to toggle on/off.

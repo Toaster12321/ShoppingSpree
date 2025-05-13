@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - HealthDrop
   - InstaKill
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Obstacles
   - 
   - 
   - 
