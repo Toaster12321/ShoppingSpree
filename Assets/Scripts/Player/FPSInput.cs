@@ -21,8 +21,6 @@ public class FPSInput : MonoBehaviour
     //serialize field allows a private var to be able to be viewed in the editor
     [SerializeField] private MovementState _movementState;
 
-    private float verticalVelocity = 0f;
-
     private void OnEnable()
     {
         Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
@@ -50,28 +48,31 @@ public class FPSInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float deltaX = Input.GetAxis("Horizontal") * speed;
-        float deltaZ = Input.GetAxis("Vertical") * speed;
+        float deltaX = Input.GetAxis("Horizontal") * speed; //Time.deltaTime;
+        float deltaZ = Input.GetAxis("Vertical") * speed; //Time.deltaTime;
 
-        // Store movement in a Vector3 (horizontal movement only)
+        //instead of using transform.Translate like below, use the character controller instead
+        //transform.Translate(deltaX, 0, deltaZ);
+
+        //Store movement in a Vector3
         Vector3 movement = new Vector3(deltaX, 0, deltaZ);
+
+        //clamp the vector to ensure the player doesnt move too fast
         movement = Vector3.ClampMagnitude(movement, speed);
+
+        //Apply gravity so player cannot float
+        movement.y = gravity;
+
+        //multiply the entire vector by Time.deltaTime to move a certain amount within one frame
+        //derived from physics equation speed(velocity) times time = distance
+        movement *= Time.deltaTime;
+
+        //transform movement from local to global coordinates
         movement = transform.TransformDirection(movement);
 
-        // Gravity and vertical movement
-        if (characterController.isGrounded)
-        {
-            verticalVelocity = -1f; // Small downward force to keep grounded
-        }
-        else
-        {
-            verticalVelocity += gravity * Time.deltaTime;
-        }
+        //move character using the Move method
+        characterController.Move(movement);
 
-        movement.y = verticalVelocity;
-
-        // Move character
-        characterController.Move(movement * Time.deltaTime);
     }
 
     public void speedBuff(float mult, float duration)
