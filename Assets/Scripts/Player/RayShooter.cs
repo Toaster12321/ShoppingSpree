@@ -61,29 +61,60 @@ public class RayShooter : MonoBehaviour
     /// Public method to fire the weapon that can be called from inventory items
     /// </summary>
     public void Shoot()
+{
+    if (cam == null) return;
+    
+    Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
+    Ray ray = cam.ScreenPointToRay(point);
+    if (SoundFXManager.instance != null && raygunSound != null) // Good practice to check for SoundFXManager too
     {
-        if (cam == null) return;
-        
-        // Calculate the center of the screen
-        Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
-        // Create a ray whose starting point is the middle of the screen
-        Ray ray = cam.ScreenPointToRay(point);
         SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, .5f);
-        // Create a raycast object to figure out what was hit
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+    }
+
+    RaycastHit hit;
+    if (Physics.Raycast(ray, out hit)) // Consider adding a max distance: Physics.Raycast(ray, out hit, yourMaxRayDistance)
+    {
+        Debug.Log("Raycast Hit: " + hit.transform.name + " at point: " + hit.point);
+        GameObject hitObject = hit.transform.gameObject;
+
+        // --- MODIFICATION FOR FLYING BANANA ---
+        FlyingBananaAI bananaEnemy = hitObject.GetComponent<FlyingBananaAI>();
+        if (bananaEnemy != null)
         {
-            // For now, print out the coords of where the ray hit
-            Debug.Log("Hit: " + hit.point);
-            // If object was reactive target
-            GameObject hitObject = hit.transform.gameObject;
-            EnemyMovement enemy = hitObject.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            Debug.Log("Hit a Flying Banana!");
+            // Ensure _damageVar and currentDMG are valid. TakeDamage in FlyingBananaAI expects an int.
+            if (_damageVar != null)
             {
-                enemy.TakeDamage(_damageVar.currentDMG);
+                bananaEnemy.TakeDamage((int)_damageVar.currentDMG); 
+            }
+            else
+            {
+                Debug.LogWarning("PlayerCharacter (_damageVar) not found on RayShooter.");
+            }
+            
+        }
+        
+        else 
+        {
+            EnemyMovement otherEnemy = hitObject.GetComponent<EnemyMovement>();
+            if (otherEnemy != null)
+            {
+                Debug.Log("Hit an EnemyMovement type enemy!");
+                if (_damageVar != null)
+                {
+                    otherEnemy.TakeDamage(_damageVar.currentDMG); // EnemyMovement's TakeDamage expects a float
+                }
+                else
+                {
+                    Debug.LogWarning("PlayerCharacter (_damageVar) not found on RayShooter.");
+                }
                 Messenger.Broadcast(GameEvent.ENEMY_HIT);
-                // Debug.Log("Target hit!");
             }
         }
     }
+    else
+    {
+        Debug.Log("Raycast hit nothing.");
+    }
+}
 }
