@@ -472,10 +472,10 @@ public class EnemyMovement : MonoBehaviour
         {
             GameManager.instance.EnemyDied(this.gameObject);
         }
-
+        
         // Award points to the player - use GlobalManager reference
         AddPointsForKill();
-
+        
         // Play death sound if available
         if (enemyDieSound != null && enemyDieSound.Length > 0)
         {
