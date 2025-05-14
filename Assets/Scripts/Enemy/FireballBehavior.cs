@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class FireballBehavior : MonoBehaviour
 {
-    public float speed = 15f;
+    public float speed = 10f;
     public float lifetime = 3f;         // How long the fireball exists
-    public int damage = 20;             // Damage the fireball deals (integer)
+    public int damage = 10;             // Damage the fireball deals (integer)
     public GameObject explosionEffectPrefab; // Assign a particle effect prefab for an explosion
 
     void Start()

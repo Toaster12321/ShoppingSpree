@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3864647096442384560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4538040120224251805}
+  - component: {fileID: 7265337316830774076}
+  m_Layer: 0
+  m_Name: CheezeBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4538040120224251805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864647096442384560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.45, z: 1.492}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2337843632250430660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7265337316830774076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864647096442384560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10720c1ab9bc5384ebaaadc0dd101ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  lifetime: 3
+  damage: 20
+  explosionEffectPrefab: {fileID: 2879934643527805237, guid: 93a0151f39e84644c88c9689d9bbd042, type: 3}
 --- !u!1001 &2880906388908753711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,7 +106,10 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5414784132c30fd40afa50c5f5384144, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 76a545539220a394eaadab0cbbeaefcf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4538040120224251805}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 76a545539220a394eaadab0cbbeaefcf, type: 3}
       insertIndex: -1
@@ -73,6 +124,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7060129106752030566}
   m_SourcePrefab: {fileID: 100100000, guid: 76a545539220a394eaadab0cbbeaefcf, type: 3}
+--- !u!4 &2337843632250430660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 76a545539220a394eaadab0cbbeaefcf, type: 3}
+  m_PrefabInstance: {fileID: 2880906388908753711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3114908509523836542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 76a545539220a394eaadab0cbbeaefcf, type: 3}
@@ -91,7 +147,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  enemies: []
+  patrolSpeed: 2
+  chaseSpeed: 5
+  stoppingDistance: 10
+  maxHealth: 100
+  detectionRange: 20
+  fireballPrefab: {fileID: 2879934643527805237, guid: 93a0151f39e84644c88c9689d9bbd042, type: 3}
+  firePoint: {fileID: 4538040120224251805}
+  fireRate: 1
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15
+  playerTransform: {fileID: 4538040120224251805}
 --- !u!23 &1614061565647240399
 MeshRenderer:
   m_ObjectHideFlags: 0
