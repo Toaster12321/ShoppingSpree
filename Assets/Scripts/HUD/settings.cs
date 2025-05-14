@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class settings : MonoBehaviour
 {
     //shows settings menu
+    private void Start()
+    {
+        
+    }
     public void Open()
     {
         gameObject.SetActive(true);
