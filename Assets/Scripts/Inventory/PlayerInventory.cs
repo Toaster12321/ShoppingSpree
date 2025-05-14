@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject weapon_item;
     
     [SerializeField] Camera cam;
-    [SerializeField] GameObject pickUpItem_gameobject;
+    [SerializeField] GameObject pickUpItem_gameobject; // This will now reference the interaction prompt panel
     [SerializeField] GameObject inventoryFull_gameobject;
     [SerializeField] private AudioClip[] useCoffeeSound; 
     [SerializeField] private AudioClip[] useProteinSound; 
@@ -116,13 +116,19 @@ public class PlayerInventory : MonoBehaviour
     
     private void HandleItemPickup()
     {
-        // Picking up items
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        // Picking up items - using center of screen instead of mouse position
+        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hitInfo;
+        
+        // Debug draw ray to see where it's pointed
+        Debug.DrawRay(ray.origin, ray.direction * playerReach, Color.red, 0.5f);
 
-        // Raycast to hit items 
+        // Raycast to hit items with a layer mask for interactable objects
         if (Physics.Raycast(ray, out hitInfo, playerReach))
         {
+            // Show what we hit for debugging
+            Debug.Log($"Looking at: {hitInfo.collider.gameObject.name} at distance {hitInfo.distance}");
+            
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
@@ -131,6 +137,10 @@ public class PlayerInventory : MonoBehaviour
                 {
                     // Shows inventory full text
                     inventoryFull_gameobject.SetActive(true);
+                    if (NotificationManager.Instance != null)
+                    {
+                        NotificationManager.Instance.HideInteractionPrompt();
+                    }
                     return;
                 }
                 
@@ -140,12 +150,21 @@ public class PlayerInventory : MonoBehaviour
                     pickable.itemScriptableObject.item_type == itemType.flashlight)
                 {
                     // Let the FlashlightPickable handle this with NotificationManager
-                    pickUpItem_gameobject.SetActive(false);
+                    if (NotificationManager.Instance != null)
+                    {
+                        // Show the special flashlight prompt
+                        NotificationManager.Instance.ShowFlashlightPickupPrompt();
+                        Debug.Log("Looking at flashlight - showing flashlight pickup prompt");
+                    }
                 }
                 else
                 {
-                    // Shows pickup text for non-flashlight items
-                    pickUpItem_gameobject.SetActive(true);
+                    // Show pickup prompt for non-flashlight items
+                    if (NotificationManager.Instance != null)
+                    {
+                        NotificationManager.Instance.ShowInteractionPrompt("pickup");
+                        Debug.Log("Looking at pickable item - showing pickup prompt");
+                    }
                 }
                 
                 if (Input.GetKey(pickItemKey))
@@ -173,13 +192,21 @@ public class PlayerInventory : MonoBehaviour
             }
             else
             {
-                pickUpItem_gameobject.SetActive(false);
+                // Hide all prompts when not looking at an item
+                if (NotificationManager.Instance != null)
+                {
+                    NotificationManager.Instance.HideInteractionPrompt();
+                }
                 inventoryFull_gameobject.SetActive(false);
             }
         }
         else
         {
-            pickUpItem_gameobject.SetActive(false);
+            // Hide all prompts when not looking at anything
+            if (NotificationManager.Instance != null)
+            {
+                NotificationManager.Instance.HideInteractionPrompt();
+            }
             inventoryFull_gameobject.SetActive(false);
         }
     }

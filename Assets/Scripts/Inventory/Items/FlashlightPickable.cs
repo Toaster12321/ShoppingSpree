@@ -12,9 +12,6 @@ public class FlashlightPickable : ItemPickable
     [SerializeField] private float bobHeight = 0.2f;
     [SerializeField] private float bobSpeed = 1f;
     
-    private GameObject promptObject;
-    private TextMesh promptText;
-    
     private Vector3 startPosition;
     private bool playerInRange = false;
     
@@ -32,45 +29,6 @@ public class FlashlightPickable : ItemPickable
         {
             Debug.LogError("FlashlightPickable: The assigned itemScriptableObject is not a flashlight type!");
         }
-        
-        // Create a simple 3D text prompt 
-        CreateSimpleTextPrompt();
-    }
-    
-    private void CreateSimpleTextPrompt()
-    {
-        // Create a simple text object using TextMesh (built-in)
-        promptObject = new GameObject("FlashlightPrompt");
-        promptObject.transform.SetParent(transform);
-        promptObject.transform.localPosition = new Vector3(0, 1.0f, 0); // Higher position
-        
-        // Add TextMesh component (built-in)
-        promptText = promptObject.AddComponent<TextMesh>();
-        promptText.text = "PRESS E TO PICK UP FLASHLIGHT";
-        promptText.fontSize = 30;
-        promptText.characterSize = 0.05f;
-        promptText.anchor = TextAnchor.MiddleCenter;
-        promptText.alignment = TextAlignment.Center;
-        promptText.color = Color.yellow;
-        
-        // Add a MeshRenderer to control material
-        MeshRenderer meshRenderer = promptObject.GetComponent<MeshRenderer>();
-        if (meshRenderer != null)
-        {
-            meshRenderer.material.color = Color.yellow;
-            
-            // Make text visible through walls
-            meshRenderer.receiveShadows = false;
-            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-        }
-        
-        // Add Billboard component
-        promptObject.AddComponent<Billboard>();
-        
-        // Hide initially
-        promptObject.SetActive(false);
-        
-        Debug.Log("Created simple text prompt for flashlight pickup");
     }
     
     private void Update()
@@ -81,19 +39,40 @@ public class FlashlightPickable : ItemPickable
         // Make the item bob up and down
         float newY = startPosition.y + Mathf.Sin(Time.time * bobSpeed) * bobHeight;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        
+        // Check for player in range and create raycast to verify visibility
+        if (playerInRange)
+        {
+            // Check distance to player (optional additional check)
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+                
+                // Only show prompt when player is close enough (within 3 units)
+                if (distanceToPlayer < 3f)
+                {
+                    // Show the prompt once every 2 seconds to prevent spam
+                    if (Time.time % 2 < 0.1f)
+                    {
+                        if (NotificationManager.Instance != null)
+                        {
+                            NotificationManager.Instance.ShowFlashlightPickupPrompt();
+                            Debug.Log($"Player is close to flashlight: {distanceToPlayer} units. Showing pickup prompt.");
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // When player looks at object
     private void OnMouseEnter()
     {
-        if (playerInRange)
+        if (playerInRange && NotificationManager.Instance != null)
         {
-            // Show the prompt
-            if (promptObject != null)
-            {
-                promptObject.SetActive(true);
-                Debug.Log("Showing flashlight pickup prompt");
-            }
+            // Show the flashlight pickup prompt using NotificationManager
+            NotificationManager.Instance.ShowFlashlightPickupPrompt();
         }
     }
     
@@ -101,9 +80,9 @@ public class FlashlightPickable : ItemPickable
     private void OnMouseExit()
     {
         // Hide the prompt
-        if (promptObject != null)
+        if (NotificationManager.Instance != null)
         {
-            promptObject.SetActive(false);
+            NotificationManager.Instance.HideInteractionPrompt();
         }
     }
     
@@ -118,14 +97,9 @@ public class FlashlightPickable : ItemPickable
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
             RaycastHit hit;
             
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject && NotificationManager.Instance != null)
             {
-                // Show the prompt
-                if (promptObject != null)
-                {
-                    promptObject.SetActive(true);
-                    Debug.Log("Showing flashlight pickup prompt (trigger)");
-                }
+                NotificationManager.Instance.ShowFlashlightPickupPrompt();
             }
         }
     }
@@ -138,9 +112,9 @@ public class FlashlightPickable : ItemPickable
             playerInRange = false;
             
             // Hide the prompt
-            if (promptObject != null)
+            if (NotificationManager.Instance != null)
             {
-                promptObject.SetActive(false);
+                NotificationManager.Instance.HideInteractionPrompt();
             }
         }
     }
@@ -151,9 +125,9 @@ public class FlashlightPickable : ItemPickable
         Debug.Log("Picked up flashlight - Item Type: " + (itemScriptableObject != null ? itemScriptableObject.item_type.ToString() : "null"));
         
         // Hide the prompt
-        if (promptObject != null)
+        if (NotificationManager.Instance != null)
         {
-            promptObject.SetActive(false);
+            NotificationManager.Instance.HideInteractionPrompt();
         }
         
         // Show tutorial notification for flashlight use
@@ -168,13 +142,5 @@ public class FlashlightPickable : ItemPickable
         
         // Call original behavior last - this will destroy the object
         base.PickItem();
-    }
-    
-    private void OnDestroy()
-    {
-        if (promptObject != null)
-        {
-            Destroy(promptObject);
-        }
     }
 } 
