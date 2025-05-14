@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject[] enemies; // Array of enemy GameObjects
     
     [Header("Combat")]
-    public float maxHealth = 100f;
+    //public float maxHealth = 100f;
     public float collisionDamage = 10f;
     public float playerDamage = 20f;
     private float currentHealth;
@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     public Transform playerTransform;
 
     // Private variables
-    private int currentHealth;
+    //private int currentHealth;
     private float nextFireTime = 0f;
 
     void Start()
