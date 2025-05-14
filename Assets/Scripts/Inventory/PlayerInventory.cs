@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] GameObject weapon_item;
     
     [SerializeField] Camera cam;
-    [SerializeField] GameObject pickUpItem_gameobject;
+    [SerializeField] GameObject pickUpItem_gameobject; // This will now reference the interaction prompt panel
     [SerializeField] GameObject inventoryFull_gameobject;
     [SerializeField] private AudioClip[] useCoffeeSound; 
     [SerializeField] private AudioClip[] useProteinSound; 
@@ -57,14 +57,14 @@ public class PlayerInventory : MonoBehaviour
         _playerBuff.buffEnd += resetDamage;
 
         // Debug item references
-        Debug.Log($"PlayerInventory - flashlight_item reference: {(flashlight_item == null ? "NULL" : flashlight_item.name)}");
+        // Debug.Log($"PlayerInventory - flashlight_item reference: {(flashlight_item == null ? "NULL" : flashlight_item.name)}");
         if (flashlight_item != null)
         {
             Item flashlightItemComponent = flashlight_item.GetComponent<Item>();
-            Debug.Log($"Flashlight prefab has Item component: {flashlightItemComponent != null}");
+            // Debug.Log($"Flashlight prefab has Item component: {flashlightItemComponent != null}");
             if (flashlightItemComponent != null)
             {
-                Debug.Log($"Flashlight Item type: {flashlightItemComponent.GetType()}");
+                // Debug.Log($"Flashlight Item type: {flashlightItemComponent.GetType()}");
             }
         }
 
@@ -116,13 +116,19 @@ public class PlayerInventory : MonoBehaviour
     
     private void HandleItemPickup()
     {
-        // Picking up items
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        // Picking up items - using center of screen instead of mouse position
+        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hitInfo;
+        
+        // Debug draw ray to see where it's pointed
+        // Debug.DrawRay(ray.origin, ray.direction * playerReach, Color.red, 0.5f);
 
-        // Raycast to hit items 
+        // Raycast to hit items with a layer mask for interactable objects
         if (Physics.Raycast(ray, out hitInfo, playerReach))
         {
+            // Show what we hit for debugging
+            // Debug.Log($"Looking at: {hitInfo.collider.gameObject.name} at distance {hitInfo.distance}");
+            
             IPickable item = hitInfo.collider.GetComponent<IPickable>();
             if (item != null)
             {
@@ -131,6 +137,10 @@ public class PlayerInventory : MonoBehaviour
                 {
                     // Shows inventory full text
                     inventoryFull_gameobject.SetActive(true);
+                    if (NotificationManager.Instance != null)
+                    {
+                        NotificationManager.Instance.HideInteractionPrompt();
+                    }
                     return;
                 }
                 
@@ -140,12 +150,21 @@ public class PlayerInventory : MonoBehaviour
                     pickable.itemScriptableObject.item_type == itemType.flashlight)
                 {
                     // Let the FlashlightPickable handle this with NotificationManager
-                    pickUpItem_gameobject.SetActive(false);
+                    if (NotificationManager.Instance != null)
+                    {
+                        // Show the special flashlight prompt
+                        NotificationManager.Instance.ShowFlashlightPickupPrompt();
+                        // Debug.Log("Looking at flashlight - showing flashlight pickup prompt");
+                    }
                 }
                 else
                 {
-                    // Shows pickup text for non-flashlight items
-                    pickUpItem_gameobject.SetActive(true);
+                    // Show pickup prompt for non-flashlight items
+                    if (NotificationManager.Instance != null)
+                    {
+                        NotificationManager.Instance.ShowInteractionPrompt("pickup");
+                        // Debug.Log("Looking at pickable item - showing pickup prompt");
+                    }
                 }
                 
                 if (Input.GetKey(pickItemKey))
@@ -154,14 +173,14 @@ public class PlayerInventory : MonoBehaviour
                     itemType pickedItemType = hitInfo.collider.GetComponent<ItemPickable>().itemScriptableObject.item_type;
                     
                     // Debug log
-                    Debug.Log($"Picking up item: {pickedItemType}");
+                    // Debug.Log($"Picking up item: {pickedItemType}");
                     
                     // Adds item to inventory list
                     inventoryList.Add(pickedItemType);
                     item.PickItem();
                     
                     // Debug what's in the inventory after pickup
-                    Debug.Log($"Inventory contains {inventoryList.Count} items: {string.Join(", ", inventoryList)}");
+                    // Debug.Log($"Inventory contains {inventoryList.Count} items: {string.Join(", ", inventoryList)}");
                     
                     // If this is the first item, auto-select it
                     if (inventoryList.Count == 1 && selectedItem == -1)
@@ -173,13 +192,21 @@ public class PlayerInventory : MonoBehaviour
             }
             else
             {
-                pickUpItem_gameobject.SetActive(false);
+                // Hide all prompts when not looking at an item
+                if (NotificationManager.Instance != null)
+                {
+                    NotificationManager.Instance.HideInteractionPrompt();
+                }
                 inventoryFull_gameobject.SetActive(false);
             }
         }
         else
         {
-            pickUpItem_gameobject.SetActive(false);
+            // Hide all prompts when not looking at anything
+            if (NotificationManager.Instance != null)
+            {
+                NotificationManager.Instance.HideInteractionPrompt();
+            }
             inventoryFull_gameobject.SetActive(false);
         }
     }
@@ -280,7 +307,7 @@ public class PlayerInventory : MonoBehaviour
                 // 20% increase to damage
                 _playerBuff.startBuff(20f, TempBuff.BuffType.Damage, 1.2f);
                 SoundFXManager.instance.PlayRandomSoundFXClip(useProteinSound, transform, 1f);
-                Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
+                // Debug.Log("buffed, current dmg:" + _playerStats.currentDMG);
             }
         }
         else if (currentItemType == itemType.coffee)
@@ -309,7 +336,7 @@ public class PlayerInventory : MonoBehaviour
         if (selectedItem >= 0 && selectedItem < inventoryList.Count)
         {
             itemType type = inventoryList[selectedItem];
-            Debug.Log($"NewItemSelected: Selecting {type} at index {selectedItem}");
+            // Debug.Log($"NewItemSelected: Selecting {type} at index {selectedItem}");
             
             // If there's a prefab for this item type
             if (itemSetActive.ContainsKey(type) && itemSetActive[type] != null)
@@ -324,7 +351,7 @@ public class PlayerInventory : MonoBehaviour
                     }
                     
                     // Debug prefab details
-                    Debug.Log($"Item prefab: {itemSetActive[type].name}, has Item component: {itemSetActive[type].GetComponent<Item>() != null}");
+                    // Debug.Log($"Item prefab: {itemSetActive[type].name}, has Item component: {itemSetActive[type].GetComponent<Item>() != null}");
                     
                     // Create the new item instance if needed
                     GameObject itemObj = itemSetActive[type];
@@ -337,13 +364,13 @@ public class PlayerInventory : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError($"No Item component found on {itemObj.name}");
+                        // Debug.LogError($"No Item component found on {itemObj.name}");
                     }
                 }
             }
             else
             {
-                Debug.LogError($"No prefab found for item type {type}. Check itemSetActive dictionary.");
+                // Debug.LogError($"No prefab found for item type {type}. Check itemSetActive dictionary.");
             }
         }
     }
@@ -374,7 +401,7 @@ public class PlayerInventory : MonoBehaviour
         if (_playerStats != null)
         {
             _playerStats.currentDMG = _playerStats.baseDMG;
-            Debug.Log("buff over, current dmg:" + _playerStats.currentDMG);
+            // Debug.Log("buff over, current dmg:" + _playerStats.currentDMG);
         }
     }
 }

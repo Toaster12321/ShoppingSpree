@@ -88,10 +88,59 @@ public class NotificationManager : MonoBehaviour
         // Apply custom font to all text components
         ApplyCustomFont();
         
+        // Ensure proper text rendering for this manager only
+        EnsureProperTextRendering();
+        
         // Log debug info
         if (debugMode)
         {
             Debug.Log("NotificationManager initialized successfully");
+        }
+    }
+    
+    /// <summary>
+    /// Ensures proper text rendering for this manager's components only
+    /// </summary>
+    private void EnsureProperTextRendering()
+    {
+        // Reset text component properties to defaults
+        if (notificationText != null)
+        {
+            notificationText.fontSize = 24;
+            notificationText.fontStyle = FontStyles.Normal;
+            notificationText.color = Color.white;
+            
+            // Force update
+            notificationText.ForceMeshUpdate();
+        }
+        
+        // Make sure there are no Canvas components on panels that shouldn't have them
+        // This prevents rendering issues with other UI elements
+        RemoveUnneededCanvasComponents(notificationPanel);
+        RemoveUnneededCanvasComponents(itemUsePromptPanel);
+        RemoveUnneededCanvasComponents(interactionPromptPanel);
+    }
+    
+    /// <summary>
+    /// Removes any Canvas components that might have been added during debugging
+    /// </summary>
+    private void RemoveUnneededCanvasComponents(GameObject panel)
+    {
+        if (panel == null) return;
+        
+        // Remove any Canvas components that might have been added during debugging
+        Canvas canvas = panel.GetComponent<Canvas>();
+        if (canvas != null && panel.transform.parent != null && panel.transform.parent.GetComponent<Canvas>() != null)
+        {
+            Destroy(canvas);
+            Debug.Log($"Removed unnecessary Canvas component from {panel.name}");
+            
+            // Also remove GraphicRaycaster if it exists
+            GraphicRaycaster raycaster = panel.GetComponent<GraphicRaycaster>();
+            if (raycaster != null)
+            {
+                Destroy(raycaster);
+            }
         }
     }
     
@@ -128,14 +177,21 @@ public class NotificationManager : MonoBehaviour
         if (currentNotification != null)
         {
             StopCoroutine(currentNotification);
+            currentNotification = null;
         }
         
-        // Only try to show if UI elements exist
+        // If UI elements are missing, create temporary ones if needed
         if (notificationPanel == null || notificationText == null)
         {
-            Debug.LogError("NotificationManager: UI elements not assigned. Can't show notification.");
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log instead: " + message);
+            Debug.Log("NOTIFICATION: " + message);
             return;
         }
+        
+        // Ensure text rendering settings are correct before showing
+        notificationText.fontSize = 24; // Reset to default size
+        notificationText.fontStyle = FontStyles.Normal; // Reset to normal style
+        notificationText.color = Color.white; // Reset to white
         
         // Start the new notification
         currentNotification = StartCoroutine(ShowNotificationCoroutine(message, duration));
@@ -221,17 +277,17 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void ShowInteractionPrompt(string action = "interact")
     {
-        if (interactionPromptPanel != null && interactionPromptText != null)
+        // Check if UI components exist
+        if (notificationPanel == null || notificationText == null)
         {
-            interactionPromptText.text = $"Press E to {action}";
-            // Ensure we use the default color for generic prompts
-            interactionPromptText.color = Color.white;
-            interactionPromptPanel.SetActive(true);
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for interaction prompt.");
+            Debug.Log($"PROMPT: Press E to {action}");
+            return;
         }
-        else if (debugMode)
-        {
-            Debug.LogWarning("NotificationManager: Interaction prompt UI elements not assigned.");
-        }
+        
+        // Always show "Press E to interact" regardless of action parameter
+        ShowNotification("Press E to interact", 8f);
+        Debug.Log($"Showing interaction prompt: Press E to interact");
     }
     
     /// <summary>
@@ -239,15 +295,17 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void HideInteractionPrompt()
     {
-        if (interactionPromptPanel != null)
+        // Cancel any active notification
+        if (currentNotification != null)
         {
-            interactionPromptPanel.SetActive(false);
-            
-            // Reset the text color to white when hiding the prompt
-            if (interactionPromptText != null)
-            {
-                interactionPromptText.color = Color.white;
-            }
+            StopCoroutine(currentNotification);
+            currentNotification = null;
+        }
+        
+        // Make sure panel is hidden
+        if (notificationPanel != null)
+        {
+            notificationPanel.SetActive(false);
         }
     }
     
@@ -256,6 +314,25 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void ShowItemPickupTutorial(string itemType)
     {
+        // Check if UI components exist
+        if (notificationPanel == null || notificationText == null)
+        {
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for tutorial.");
+            switch (itemType.ToLower())
+            {
+                case "flashlight":
+                    Debug.Log("TUTORIAL: Use flashlight with F key");
+                    break;
+                case "weapon":
+                    Debug.Log("TUTORIAL: Left Click to attack with weapon");
+                    break;
+                default:
+                    Debug.Log($"TUTORIAL: Picked up {itemType}");
+                    break;
+            }
+            return;
+        }
+        
         if (currentTutorial != null)
         {
             StopCoroutine(currentTutorial);
@@ -343,65 +420,35 @@ public class NotificationManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Shows a specialized flashlight pickup prompt using the interaction prompt panel
+    /// Shows a specialized flashlight pickup prompt using the notification panel
     /// </summary>
     public void ShowFlashlightPickupPrompt()
     {
-        if (interactionPromptPanel != null && interactionPromptText != null)
+        // Check if we can show notifications at all
+        if (notificationPanel == null || notificationText == null)
         {
-            // Make the text more distinctive with additional characters
-            interactionPromptText.text = ">> GRAB FLASHLIGHT: Press E <<";
-            // Use the highlight color to make it stand out
-            interactionPromptText.color = highlightColor;
-            interactionPromptPanel.SetActive(true);
-            
-            // Force the UI to update
-            if (interactionPromptText.gameObject.activeInHierarchy)
-            {
-                Canvas.ForceUpdateCanvases();
-            }
-            
-            // Call the fix text method to ensure it's visible
-            EnsureInteractionTextIsVisible();
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for flashlight prompt.");
+            Debug.Log("PROMPT: Press E to interact with flashlight");
+            return;
         }
-        else if (debugMode)
-        {
-            Debug.LogWarning("NotificationManager: Interaction prompt UI elements not assigned for flashlight pickup.");
-        }
+        
+        // Just use standard notification with normal settings - no custom formatting
+        ShowNotification("Press E to interact", 8f);
+        Debug.Log("Showing flashlight pickup prompt via notification system");
     }
     
     /// <summary>
-    /// Ensures that the interaction text is visible and properly colored
+    /// Shows a simple test message using the notification system
     /// </summary>
-    [ContextMenu("Fix Interaction Text")]
-    public void EnsureInteractionTextIsVisible()
+    public void ShowTestMessage(string message)
     {
-        if (interactionPromptText != null)
-        {
-            // Make sure the text is visible with these strong settings
-            interactionPromptText.color = new Color(1f, 1f, 0f, 1f); // Bright yellow
-            interactionPromptText.fontSize = 24; // Larger font size
-            interactionPromptText.fontStyle = TMPro.FontStyles.Bold; // Bold text
-            
-            // Force material update
-            interactionPromptText.ForceMeshUpdate(true);
-            
-            // Log that we tried to fix it
-            Debug.Log("NotificationManager: Applied high-visibility text settings to interaction text!");
-        }
-        else
-        {
-            Debug.LogError("NotificationManager: Cannot fix interaction text - text component is null!");
-        }
+        // Use ShowNotification with a long duration for testing
+        ShowNotification(message, 8f);
+        Debug.Log("Showing test message via notification system");
     }
     
-    /// <summary>
-    /// Test function to manually show the flashlight pickup prompt
-    /// </summary>
-    [ContextMenu("Test Flashlight Pickup Text")]
-    public void TestFlashlightPickupText()
+    private void Update()
     {
-        ShowFlashlightPickupPrompt();
-        Debug.Log("Manually triggered flashlight pickup text - should now be visible");
+        // No debug hotkeys to avoid UI interference
     }
 } 
