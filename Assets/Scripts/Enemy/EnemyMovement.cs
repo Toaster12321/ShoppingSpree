@@ -7,6 +7,8 @@ public class EnemyMovement : MonoBehaviour
 {
     [Header("Enemy Identification")]
     public string enemyType = "DefaultGroundEnemy"; // << ADDED: Set this in Inspector for each enemy prefab
+    [Tooltip("Points awarded when this enemy is killed")]
+    public int pointValue = 50; // Default point value
 
     public enum MovementState
     {
@@ -38,6 +40,16 @@ public class EnemyMovement : MonoBehaviour
     private Color originalColor;
     private Transform player;
 
+    void Awake()
+    {
+        // Force Tomato Enemy to have correct settings
+        if (gameObject.name.Contains("Tomato") || gameObject.name.Contains("tomato"))
+        {
+            enemyType = "TomatoEnemy";
+            pointValue = 100;
+        }
+    }
+
     void Start()
     {
         currentState = MovementState.ROAMING;
@@ -49,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("EnemyMovement: Renderer or material not found for " + gameObject.name + ". Flash effect may not work.");
+            // Debug.LogWarning("EnemyMovement: Renderer or material not found for " + gameObject.name + ". Flash effect may not work.");
         }
         currentHealth = maxHealth;
         roamTimer = roamTime;
@@ -62,7 +74,19 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Player object not found. Please ensure the player is tagged as 'Player'.");
+            // Debug.LogError("Player object not found. Please ensure the player is tagged as 'Player'.");
+        }
+        
+        // Register point value for this enemy type if PointSystem exists
+        if (GlobalManager.Points != null)
+        {
+            // Register with GlobalManager's point system first (preferred)
+            GlobalManager.Points.AddEnemyPointValue(enemyType, pointValue);
+        }
+        else if (PointSystem.instance != null)
+        {
+            // Fallback to singleton instance
+            PointSystem.instance.AddEnemyPointValue(enemyType, pointValue);
         }
     }
 
@@ -220,12 +244,67 @@ public class EnemyMovement : MonoBehaviour
 
     private void Die()
     {
+        // Force Tomato Enemy to give 100 points
+        if (gameObject.name.Contains("Tomato") || gameObject.name.Contains("tomato"))
+        {
+            pointValue = 100;
+        }
+        
         // Notify the GameManager that this enemy has died, passing this enemy's GameObject
         if (GameManager.instance != null)
         {
-            GameManager.instance.EnemyDied(gameObject); 
+            GameManager.instance.EnemyDied(gameObject);
         }
+        
+        // Award points for kill
+        AddPointsForKill();
+        
+        // Show notification for points if notification manager exists
+        if (NotificationManager.Instance != null)
+        {
+            NotificationManager.Instance.ShowNotification($"+{pointValue} points", 1.5f);
+        }
+        
         //SoundFXManager.instance.PlayRandomSoundFXClip(enemyDieSound, transform, 1f);
         Destroy(gameObject);
+    }
+    
+    // Helper method to add points
+    private void AddPointsForKill()
+    {
+        // Special case for Tomato Enemy - always give exactly 100 points
+        if (gameObject.name.Contains("Tomato") || gameObject.name.Contains("tomato"))
+        {
+            if (GlobalManager.Points != null)
+            {
+                GlobalManager.Points.AddPoints(100);
+                return;
+            }
+        }
+        
+        // First try GlobalManager reference (this is what doors use)
+        if (GlobalManager.Points != null)
+        {
+            // DIRECT METHOD: Add the actual point value instead of relying on enemy type lookup
+            GlobalManager.Points.AddPoints(pointValue);
+            return;
+        }
+        
+        // Then try singleton instance
+        if (PointSystem.instance != null)
+        {
+            // DIRECT METHOD: Add the actual point value instead of relying on enemy type lookup
+            PointSystem.instance.AddPoints(pointValue);
+            return;
+        }
+        
+        // Last resort - try finding any PointSystem in the scene
+        PointSystem pointSystem = FindObjectOfType<PointSystem>();
+        if (pointSystem != null)
+        {
+            // DIRECT METHOD: Add the actual point value instead of relying on enemy type lookup
+            pointSystem.AddPoints(pointValue);
+            return;
+        }
     }
 }

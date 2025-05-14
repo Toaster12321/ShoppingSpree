@@ -127,7 +127,7 @@ public class EnemyAI : MonoBehaviour
         if (GlobalManager.Points != null)
         {
             GlobalManager.Points.AddPointsForEnemy(enemyType);
-            Debug.Log($"Added points via GlobalManager for enemy type: {enemyType}");
+            // Debug.Log($"Added points via GlobalManager for enemy type: {enemyType}");
             return;
         }
         
@@ -135,7 +135,7 @@ public class EnemyAI : MonoBehaviour
         if (PointSystem.instance != null)
         {
             PointSystem.instance.AddPointsForEnemy(enemyType);
-            Debug.Log($"Added points via singleton for enemy type: {enemyType}");
+            // Debug.Log($"Added points via singleton for enemy type: {enemyType}");
             return;
         }
         
@@ -144,10 +144,10 @@ public class EnemyAI : MonoBehaviour
         if (pointSystem != null)
         {
             pointSystem.AddPointsForEnemy(enemyType);
-            Debug.Log($"Added points via FindObjectOfType for enemy type: {enemyType}");
+            // Debug.Log($"Added points via FindObjectOfType for enemy type: {enemyType}");
             return;
         }
         
-        Debug.LogWarning("PointSystem not found! Could not award points.");
+        // Debug.LogWarning("PointSystem not found! Could not award points.");
     }
 }
