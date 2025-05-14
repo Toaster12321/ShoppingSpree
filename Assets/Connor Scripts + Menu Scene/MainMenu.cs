@@ -13,20 +13,11 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         Cursor.lockState = CursorLockMode.None;
-<<<<<<< Updated upstream
-=======
         Cursor.visible = true;
         if(waveSliderPanel != null)
         {
             waveSliderPanel.SetActive(false);
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     public void PlayEndlessGame()
@@ -35,7 +26,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(1);
     }
 
-public void PlaySurvivalGame()
+    public void PlaySurvivalGame()
     {
         GameManager.selectedGameMode = GameMode.Survival;
         // Set the wave slider panel active b4 loading the scene
@@ -43,10 +34,9 @@ public void PlaySurvivalGame()
         {
             waveSliderPanel.SetActive(true);
         }
-     
     }
 
-//method when changing the slider value
+    //method when changing the slider value
     public void OnWaveSliderValueChanged(float value)
     {
         if (waveSliderText != null && waveSliderPanel != null)

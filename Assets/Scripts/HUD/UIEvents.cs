@@ -29,7 +29,8 @@ public class UIEvents : MonoBehaviour
                 _settingsMenu.Open();
                 Time.timeScale = 0.0f;
                 Cursor.lockState = CursorLockMode.None;
-                
+                Cursor.visible = true;
+
             }
             else if (_gameActive == false)
             {
@@ -37,7 +38,7 @@ public class UIEvents : MonoBehaviour
                 _settingsMenu.Close();
                 Time.timeScale = 1f;
                 Cursor.lockState = CursorLockMode.Locked;
-                
+                Cursor.visible = false;
             }
         }
 
@@ -51,6 +52,8 @@ public class UIEvents : MonoBehaviour
         _settingsMenu.Open();
         _gameActive = false;
         Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     //used only for settings button
@@ -59,13 +62,16 @@ public class UIEvents : MonoBehaviour
         _settingsMenu.Close();
         _gameActive = true;
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void OnVictoryScreen()
     {
-        Cursor.lockState = CursorLockMode.None;
         _VictoryScreen.Open();
         _gameActive = false;
         Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 }

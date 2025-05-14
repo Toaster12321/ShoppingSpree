@@ -4,11 +4,13 @@ using UnityEngine;
 
 //ensures other managers exist
 [RequireComponent(typeof(SoundFXManager))]
+[RequireComponent(typeof(PointSystem))]
 
 public class GlobalManager : MonoBehaviour
 {
     //for other code to access managers
     public static SoundFXManager Audio { get; private set; }
+    public static PointSystem Points { get; private set; }
 
     private List<IGameManager> startSequence;
 
@@ -16,9 +18,11 @@ public class GlobalManager : MonoBehaviour
     {
         //gathering scripts
         Audio = GetComponent<SoundFXManager>();
+        Points = GetComponent<PointSystem>();
 
         startSequence = new List<IGameManager>();
         startSequence.Add(Audio);
+        startSequence.Add(Points);
 
         //launch startup sequence
         StartCoroutine(StartupManagers());

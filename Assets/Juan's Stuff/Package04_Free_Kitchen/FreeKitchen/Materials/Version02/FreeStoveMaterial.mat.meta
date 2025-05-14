@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2af292c5cb48a401b9c651c5e50656ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 245554
+  packageName: Free Kitchen - Cabinets and Equipment
+  packageVersion: 1.1.0
+  assetPath: Assets/Package04_Free_Kitchen/FreeKitchen/Materials/Version02/FreeStoveMaterial.mat
+  uploadId: 582048

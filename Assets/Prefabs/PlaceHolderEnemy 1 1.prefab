@@ -84,6 +84,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 943a51c99ccaa234982861713c3c0ff2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3437000965147799207}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 943a51c99ccaa234982861713c3c0ff2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3250672201741259237}
   m_SourcePrefab: {fileID: 100100000, guid: 943a51c99ccaa234982861713c3c0ff2, type: 3}
 --- !u!1 &3722761901725519338 stripped
 GameObject:
@@ -107,7 +110,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -148,7 +151,6 @@ MonoBehaviour:
   chaseSpeed: 4
   roamSpeed: 2
   chaseRange: 20
-  player: {fileID: 0}
   stopDistance: 1
   obstacleAvoidanceRange: 2
   obstacleAvoidanceSpeed: 1
@@ -156,6 +158,18 @@ MonoBehaviour:
   collisionDamage: 10
   playerDamage: 20
   roamTime: 5
+  itemTable:
+  - item: {fileID: 4753764377832728096, guid: 6cbc76a1484974142bafa3893f825ee1, type: 3}
+    dropChance: 20
+  - item: {fileID: 5426571477192577030, guid: 9e5f7ad6561bb6c48b59e0ff104f75c8, type: 3}
+    dropChance: 10
+  enemyHurtSound:
+  - {fileID: 8300000, guid: a649241e38131db459ad36154cd4a0ec, type: 3}
+  - {fileID: 8300000, guid: 189163aecd5fecb4ebef4dd9f268287b, type: 3}
+  - {fileID: 8300000, guid: 80b7e92e1bda0464297c5b3fcd740f2a, type: 3}
+  enemyDieSound:
+  - {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
+  - {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
 --- !u!54 &3437000965147799207
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,3 +197,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &3250672201741259237
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722761901725519338}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.004258692
+  m_Height: 0.007987044
+  m_Direction: 1
+  m_Center: {x: -0.00000029173682, y: -2.3283063e-10, z: 0.00031672834}
