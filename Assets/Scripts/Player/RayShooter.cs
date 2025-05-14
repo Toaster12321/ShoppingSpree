@@ -8,11 +8,15 @@ public class RayShooter : MonoBehaviour
     private Camera cam;
     [SerializeField] private AudioClip raygunSound;
     private PlayerCharacter _damageVar; // Damage dealt to the enemy
+    private Coroutine scannerLightCoroutine;
 
     [Header("Scanner Settings")]
     public GameObject scannerModel;
-    [Tooltip("Assign the 3D model gameObject here")]
     public KeyCode scannerToggleKey = KeyCode.Q;
+    public Light scannerLight;
+    public float scannerLightDuration = 0.2f;
+
+    
 
     void Start()
     {
@@ -28,12 +32,20 @@ public class RayShooter : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Start
+        // Start scanner and light
         if (scannerModel != null) {
         scannerModel.SetActive(true);
         }
         else {
             Debug.LogWarning("Scanner model not assigned...");
+        }
+        if (scannerLight != null) {
+            scannerLight.enabled = false;
+        }
+        else {
+            if (scannerModel != null) {
+                Debug.LogWarning("Scanner light not assigned due to missing scanner model.");
+            }
         }
     }
 
@@ -48,6 +60,15 @@ public class RayShooter : MonoBehaviour
         // Wait
         yield return new WaitForSeconds(1);
         Destroy(sphere);
+    }
+
+    private IEnumerator FlashScannerLightEffect() {
+        if (scannerLight == null) yield break;
+
+        scannerLight.enabled = true;
+        yield return new WaitForSeconds(scannerLightDuration);
+        scannerLight.enabled = false;
+        scannerLightCoroutine = null;
     }
 
     void Update()
@@ -78,6 +99,14 @@ public class RayShooter : MonoBehaviour
     public void Shoot()
 {
     if (cam == null) return;
+
+    // Scanner light activation
+    if (scannerModel != null && scannerModel.activeSelf && scannerLight != null) {
+        if (scannerLightCoroutine != null) {
+            StopCoroutine(scannerLightCoroutine);
+        }
+        scannerLightCoroutine = StartCoroutine(FlashScannerLightEffect());
+    }
     
     Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
     Ray ray = cam.ScreenPointToRay(point);
