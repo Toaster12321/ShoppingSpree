@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Juan's Stuff/Scenes/Final Scene.unity.meta
 guid: 8b4dff97bfd33a74592d696db07e5297
+========
+guid: 6b0d74196a5af174f9051e2bf723a1dc
+folderAsset: yes
+>>>>>>>> DougsTest3:Assets/Models/banana.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

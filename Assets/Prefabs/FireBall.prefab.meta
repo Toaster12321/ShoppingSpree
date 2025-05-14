@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/FireBall.prefab.meta
 guid: 93a0151f39e84644c88c9689d9bbd042
 PrefabImporter:
+========
+guid: 7c69948137e242e4d9bab4648e4ca185
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> antonio-branch:Assets/Scripts/Managers.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
