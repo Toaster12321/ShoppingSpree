@@ -180,10 +180,11 @@ public class NotificationManager : MonoBehaviour
             currentNotification = null;
         }
         
-        // Only try to show if UI elements exist
+        // If UI elements are missing, create temporary ones if needed
         if (notificationPanel == null || notificationText == null)
         {
-            Debug.LogError("NotificationManager: UI elements not assigned. Can't show notification.");
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log instead: " + message);
+            Debug.Log("NOTIFICATION: " + message);
             return;
         }
         
@@ -276,6 +277,14 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void ShowInteractionPrompt(string action = "interact")
     {
+        // Check if UI components exist
+        if (notificationPanel == null || notificationText == null)
+        {
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for interaction prompt.");
+            Debug.Log($"PROMPT: Press E to {action}");
+            return;
+        }
+        
         // Always show "Press E to interact" regardless of action parameter
         ShowNotification("Press E to interact", 8f);
         Debug.Log($"Showing interaction prompt: Press E to interact");
@@ -305,6 +314,25 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void ShowItemPickupTutorial(string itemType)
     {
+        // Check if UI components exist
+        if (notificationPanel == null || notificationText == null)
+        {
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for tutorial.");
+            switch (itemType.ToLower())
+            {
+                case "flashlight":
+                    Debug.Log("TUTORIAL: Use flashlight with F key");
+                    break;
+                case "weapon":
+                    Debug.Log("TUTORIAL: Left Click to attack with weapon");
+                    break;
+                default:
+                    Debug.Log($"TUTORIAL: Picked up {itemType}");
+                    break;
+            }
+            return;
+        }
+        
         if (currentTutorial != null)
         {
             StopCoroutine(currentTutorial);
@@ -396,6 +424,14 @@ public class NotificationManager : MonoBehaviour
     /// </summary>
     public void ShowFlashlightPickupPrompt()
     {
+        // Check if we can show notifications at all
+        if (notificationPanel == null || notificationText == null)
+        {
+            Debug.LogWarning("NotificationManager: UI elements not assigned. Using debug log for flashlight prompt.");
+            Debug.Log("PROMPT: Press E to interact with flashlight");
+            return;
+        }
+        
         // Just use standard notification with normal settings - no custom formatting
         ShowNotification("Press E to interact", 8f);
         Debug.Log("Showing flashlight pickup prompt via notification system");
