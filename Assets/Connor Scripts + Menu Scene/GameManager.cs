@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum GameMode // Enum to define game modes
 {
@@ -9,27 +13,13 @@ public enum GameMode // Enum to define game modes
     Survival
 }
 
-
-public enum GameMode // Enum to define game modes
-{
-    Endless,
-    Survival
-}
-
-
-public enum GameMode // Enum to define game modes
-{
-    Endless,
-    Survival
-}
-
-
-public class GameManager : MonoBehaviour
+public class WaveGameManager : MonoBehaviour
 {
     public static GameMode selectedGameMode = GameMode.Endless; // Default game mode
     public static int WavesToRun = 5; // Static variable to track the number of waves the player selected to play
-    public static GameManager instance;
+    public static WaveGameManager instance;
     private int enemyCount;
+    private Dictionary<string, GameObject> enemyPrefabs = new Dictionary<string, GameObject>();
 
     private int enemiesKilled = 0;
     
@@ -294,12 +284,4 @@ public class GameManager : MonoBehaviour
         Debug.LogWarning("No enemy prefab available for spawning.");
     }
 }
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }

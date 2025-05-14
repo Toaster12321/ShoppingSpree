@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class WaveMainMenu : MonoBehaviour
 {
     public GameObject waveSliderPanel;
     public Slider waveSlider;
@@ -13,40 +13,30 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         Cursor.lockState = CursorLockMode.None;
-<<<<<<< Updated upstream
-=======
         Cursor.visible = true;
         if(waveSliderPanel != null)
         {
             waveSliderPanel.SetActive(false);
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     public void PlayEndlessGame()
     {
-        GameManager.selectedGameMode = GameMode.Endless;
+        WaveGameManager.selectedGameMode = GameMode.Endless;
         SceneManager.LoadSceneAsync(1);
     }
 
-public void PlaySurvivalGame()
+    public void PlaySurvivalGame()
     {
-        GameManager.selectedGameMode = GameMode.Survival;
+        WaveGameManager.selectedGameMode = GameMode.Survival;
         // Set the wave slider panel active b4 loading the scene
         if (waveSliderPanel != null)
         {
             waveSliderPanel.SetActive(true);
         }
-     
     }
 
-//method when changing the slider value
+    //method when changing the slider value
     public void OnWaveSliderValueChanged(float value)
     {
         if (waveSliderText != null && waveSliderPanel != null)
@@ -59,7 +49,7 @@ public void PlaySurvivalGame()
     {
         if (waveSlider != null)
         {
-            GameManager.WavesToRun = Mathf.RoundToInt(waveSlider.value);
+            WaveGameManager.WavesToRun = Mathf.RoundToInt(waveSlider.value);
         }
         SceneManager.LoadSceneAsync(1);
     }

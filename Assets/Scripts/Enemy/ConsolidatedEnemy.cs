@@ -397,9 +397,9 @@ public class ConsolidatedEnemy : MonoBehaviour
         }
         
         // Notify the game manager
-        if (GameManager.instance != null)
+        if (WaveGameManager.instance != null)
         {
-            GameManager.instance.EnemyDied(gameObject);
+            WaveGameManager.instance.EnemyDied();
         }
         
         // Award points
