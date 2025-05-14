@@ -9819,6 +9819,89 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.88909125, y: 3.1143036, z: 1.8100986}
   m_Center: {x: 0.444399, y: -0.020073896, z: 1.2575634}
+--- !u!1001 &323011047
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1382203115}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.36299998
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35800004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_Name
+      value: scannerModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+--- !u!4 &323011048 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+  m_PrefabInstance: {fileID: 323011047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &323011049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 597efaa969a7c8441b6805fe8e1909c9, type: 3}
+  m_PrefabInstance: {fileID: 323011047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &328702424
 GameObject:
   m_ObjectHideFlags: 0
@@ -37574,7 +37657,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.54759544, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 323011048}
   m_Father: {fileID: 2111768956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1390634247 stripped
@@ -58380,6 +58464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raygunSound: {fileID: 8300000, guid: 200f80228f4e90e4eab53a62f74f3865, type: 3}
+  scannerModel: {fileID: 323011049}
+  scannerToggleKey: 113
 --- !u!114 &2111768946
 MonoBehaviour:
   m_ObjectHideFlags: 0

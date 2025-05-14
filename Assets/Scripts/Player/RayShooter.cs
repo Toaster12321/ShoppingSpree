@@ -9,6 +9,11 @@ public class RayShooter : MonoBehaviour
     [SerializeField] private AudioClip raygunSound;
     private PlayerCharacter _damageVar; // Damage dealt to the enemy
 
+    [Header("Scanner Settings")]
+    public GameObject scannerModel;
+    [Tooltip("Assign the 3D model gameObject here")]
+    public KeyCode scannerToggleKey = KeyCode.Q;
+
     void Start()
     {
         _damageVar = GetComponent<PlayerCharacter>();
@@ -22,9 +27,15 @@ public class RayShooter : MonoBehaviour
         // Hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Start
+        if (scannerModel != null) {
+        scannerModel.SetActive(true);
+        }
+        else {
+            Debug.LogWarning("Scanner model not assigned...");
+        }
     }
-
-
 
     private IEnumerator SphereIndicator(Vector3 pos)
     {
@@ -47,6 +58,17 @@ public class RayShooter : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Shoot();
+        }
+    }
+
+    public void ToggleScanner() {
+        if (scannerModel != null) {
+            bool currentScannerState = scannerModel.activeSelf;
+            scannerModel.SetActive(!currentScannerState);
+            Debug.Log("Scanner " + (scannerModel.activeSelf ? "activated" : "deactivated"));
+        }
+        else {
+            Debug.LogWarning("Scanner toggle failed. No scanner model assigned.");
         }
     }
     
