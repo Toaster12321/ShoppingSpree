@@ -17,15 +17,20 @@ public enum GameMode // Enum to define game modes
 }
 
 
+public enum GameMode // Enum to define game modes
+{
+    Endless,
+    Survival
+}
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameMode selectedGameMode = GameMode.Endless; // Default game mode
     public static int WavesToRun = 5; // Static variable to track the number of waves the player selected to play
     public static GameManager instance;
     private int enemyCount;
-<<<<<<< Updated upstream
 
-=======
     private int enemiesKilled = 0;
     
     [Header("Game Settings")]
@@ -39,7 +44,6 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public GameObject defaultEnemyPrefab; // Optional fallback enemy prefab
     
->>>>>>> Stashed changes
     private UIEvents _uiEvents; //reference to the UI Event script for victory screen
 
     [Header("UI References")]
@@ -48,12 +52,6 @@ public class GameManager : MonoBehaviour
     [Header("Spawn Area Settings")]
     public List<GameObject> spawnPlane; // Area where enemies will spawn
 
-
-    [Header("UI References")]
-    public TMPro.TMP_Text waveCounterText;
-
-    [Header("Spawn Area Settings")]
-    public List<GameObject> spawnPlane; // Area where enemies will spawn
 
 
     void Awake()
@@ -79,8 +77,6 @@ public class GameManager : MonoBehaviour
 
         // Register the listener for the ENEMY_HIT event
         Messenger.AddListener("ENEMY_HIT", OnEnemyHit);
-<<<<<<< Updated upstream
-=======
         
         Debug.Log($"Total enemies in scene: {enemyCount}");
         
@@ -134,7 +130,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"Cached enemy prefab: {prefab.name} as {normalizedName}");
             }
         }
->>>>>>> Stashed changes
     }
 
     void OnDestroy()
@@ -169,8 +164,7 @@ public class GameManager : MonoBehaviour
         }
         //ADD VICTORY SCENE HERE
     }
-<<<<<<< Updated upstream
-=======
+
 
     // Ensure a PointSystem exists in the scene
     private void EnsurePointSystemExists()
@@ -302,6 +296,9 @@ public class GameManager : MonoBehaviour
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

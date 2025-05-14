@@ -21,6 +21,9 @@ public class MainMenu : MonoBehaviour
             waveSliderPanel.SetActive(false);
         }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
