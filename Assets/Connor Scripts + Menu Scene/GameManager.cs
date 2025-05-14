@@ -13,11 +13,11 @@ public enum GameMode // Enum to define game modes
     Survival
 }
 
-public class WaveGameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public static GameMode selectedGameMode = GameMode.Endless; // Default game mode
     public static int WavesToRun = 5; // Static variable to track the number of waves the player selected to play
-    public static WaveGameManager instance;
+    public static GameManager instance;
     private int enemyCount;
     private Dictionary<string, GameObject> enemyPrefabs = new Dictionary<string, GameObject>();
 

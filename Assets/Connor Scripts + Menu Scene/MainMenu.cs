@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class WaveMainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public GameObject waveSliderPanel;
     public Slider waveSlider;
@@ -22,13 +22,13 @@ public class WaveMainMenu : MonoBehaviour
 
     public void PlayEndlessGame()
     {
-        WaveGameManager.selectedGameMode = GameMode.Endless;
+        GameManager.selectedGameMode = GameMode.Endless;
         SceneManager.LoadSceneAsync(1);
     }
 
     public void PlaySurvivalGame()
     {
-        WaveGameManager.selectedGameMode = GameMode.Survival;
+        GameManager.selectedGameMode = GameMode.Survival;
         // Set the wave slider panel active b4 loading the scene
         if (waveSliderPanel != null)
         {
@@ -49,7 +49,7 @@ public class WaveMainMenu : MonoBehaviour
     {
         if (waveSlider != null)
         {
-            WaveGameManager.WavesToRun = Mathf.RoundToInt(waveSlider.value);
+            GameManager.WavesToRun = Mathf.RoundToInt(waveSlider.value);
         }
         SceneManager.LoadSceneAsync(1);
     }
