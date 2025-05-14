@@ -10,6 +10,13 @@ public enum GameMode // Enum to define game modes
 }
 
 
+public enum GameMode // Enum to define game modes
+{
+    Endless,
+    Survival
+}
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameMode selectedGameMode = GameMode.Endless; // Default game mode
@@ -34,6 +41,13 @@ public class GameManager : MonoBehaviour
     
 >>>>>>> Stashed changes
     private UIEvents _uiEvents; //reference to the UI Event script for victory screen
+
+    [Header("UI References")]
+    public TMPro.TMP_Text waveCounterText;
+
+    [Header("Spawn Area Settings")]
+    public List<GameObject> spawnPlane; // Area where enemies will spawn
+
 
     [Header("UI References")]
     public TMPro.TMP_Text waveCounterText;
@@ -287,5 +301,8 @@ public class GameManager : MonoBehaviour
     }
 }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

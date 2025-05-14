@@ -4831,6 +4831,9 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.5000001, z: 4}
   m_Center: {x: 0, y: 0.2500003, z: 0.0000019073486}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1286083522
 GameObject:
@@ -6212,6 +6215,9 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7562691965320869908, guid: 9d9ea587f697854428137379e3a27ccc, type: 3}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1626426873
 GameObject:
@@ -6248,7 +6254,11 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: -71, y: 271}
+=======
+  m_AnchoredPosition: {x: -106, y: 336}
+>>>>>>> Stashed changes
 =======
   m_AnchoredPosition: {x: -106, y: 336}
 >>>>>>> Stashed changes
@@ -8669,7 +8679,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Color: {r: 0, g: 0, b: 0, a: 1}
+=======
+  m_Color: {r: 1, g: 0.9792453, b: 0.9792453, a: 0}
+>>>>>>> Stashed changes
 =======
   m_Color: {r: 1, g: 0.9792453, b: 0.9792453, a: 0}
 >>>>>>> Stashed changes
