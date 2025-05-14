@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Trap
   - Enemy
+  - HealthDrop
+  - InstaKill
   - Interactable
   layers:
   - Default

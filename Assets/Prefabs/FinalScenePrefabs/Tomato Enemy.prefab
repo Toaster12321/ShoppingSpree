@@ -221,3 +221,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b33ea41205c33d441ab4aaa54ee79807, type: 3}
   - {fileID: 8300000, guid: 2e8985bf8411b644fbd8f5bd8c6f6e2e, type: 3}
   showDebugRays: 1
+  enemyType: TomatoEnemy
+  itemTable:
+  - item: {fileID: 4753764377832728096, guid: 6cbc76a1484974142bafa3893f825ee1, type: 3}
+    dropChance: 35
+  - item: {fileID: 5426571477192577030, guid: 9e5f7ad6561bb6c48b59e0ff104f75c8, type: 3}
+    dropChance: 10

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8c27aeead6d968e4ba986702d6b84335
+timeCreated: 1463710623
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 67834
+  packageName: Simple FX - Cartoon Particles
+  packageVersion: 1.2
+  assetPath: Assets/SimpleFX/Prefabs/FX_BloodSplatter.prefab
+  uploadId: 615759
