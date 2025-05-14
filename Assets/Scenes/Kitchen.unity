@@ -418,6 +418,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 0.5000001, z: 4}
   m_Center: {x: 0, y: 0.24999993, z: 0}
+--- !u!1 &24696658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24696661}
+  - component: {fileID: 24696660}
+  - component: {fileID: 24696659}
+  m_Layer: 5
+  m_Name: dmgFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &24696659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24696658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &24696660
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24696658}
+  m_CullTransparentMesh: 1
+--- !u!224 &24696661
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24696658}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.29883146}
+  m_LocalScale: {x: 0.9055499, y: 0.9055499, z: 0.9055499}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 897168948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 560.6758, y: 298.50098}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &31877236 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 033a9435f5d9c554ab5521744a88345c, type: 3}
@@ -11003,8 +11078,10 @@ MonoBehaviour:
   inventoryList: 
   selectedItem: 0
   playerReach: 5
+  itemHoldTransform: {fileID: 0}
   throwItemAway: 113
   pickItemKey: 101
+  useItemKey: 101
   inventorySlotImage:
   - {fileID: 0}
   - {fileID: 0}
@@ -11013,6 +11090,8 @@ MonoBehaviour:
   protein_item: {fileID: 164070, guid: 4df3b231b76808d439e018f3b2abce25, type: 3}
   coffee_item: {fileID: 7377654114505477542, guid: d6c066d60b1023446acd56c450909887, type: 3}
   milkcarton_item: {fileID: 1586293043813886440, guid: 0ada2d68def3d514b993b091d52a3015, type: 3}
+  flashlight_item: {fileID: 0}
+  weapon_item: {fileID: 0}
   cam: {fileID: 1631208368}
   pickUpItem_gameobject: {fileID: 0}
   inventoryFull_gameobject: {fileID: 0}
@@ -11063,6 +11142,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ca032a6b63d21b34db3148fa2a23aee1, type: 3}
   - {fileID: 8300000, guid: a4d54ac017c0e024aa25c05d036ba81f, type: 3}
   loseSound: {fileID: 8300000, guid: cfed1b17a565f2e438b49268db2d2524, type: 3}
+  dmgFlash: {fileID: 24696659}
+  flashDuration: 1
+  flashColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!114 &897168943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11187,6 +11269,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1631208371}
+  - {fileID: 24696661}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &898511040 stripped
