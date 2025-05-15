@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
         enemiesKilled = 0;
         
         // Cache enemy prefabs if respawning is enabled
-        if (enableEnemyRespawn)
-        {
-            CacheEnemyPrefabs();
-        }
+        // if (enableEnemyRespawn)
+        // {
+        //     CacheEnemyPrefabs();
+        // }
 
         // Register the listener for the ENEMY_HIT event
         Messenger.AddListener("ENEMY_HIT", OnEnemyHit);
@@ -66,39 +66,39 @@ public class GameManager : MonoBehaviour
     }
     
     // Find and cache enemy prefabs in Resources folder
-    private void CacheEnemyPrefabs()
-    {
-        // Change to load from the correct directory
-        GameObject[] enemyPrefabsArray = Resources.FindObjectsOfTypeAll<GameObject>()
-            .Where(go => go.name.Contains("Enemy") && PrefabUtility.IsPartOfPrefabAsset(go))
-            .ToArray();
+    // private void CacheEnemyPrefabs()
+    // {
+    //     // Change to load from the correct directory
+    //     GameObject[] enemyPrefabsArray = Resources.FindObjectsOfTypeAll<GameObject>()
+    //         .Where(go => go.name.Contains("Enemy") && PrefabUtility.IsPartOfPrefabAsset(go))
+    //         .ToArray();
         
-        // Fallback: Directly load from Prefabs directory
-        if (enemyPrefabsArray.Length == 0)
-        {
-            // Try to find the Tomato Enemy prefab in FinalScenePrefabs
-            GameObject tomatoEnemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/FinalScenePrefabs/Tomato Enemy.prefab");
-            if (tomatoEnemyPrefab != null)
-            {
-                enemyPrefabs["TomatoEnemy"] = tomatoEnemyPrefab;
-                Debug.Log("Cached Tomato Enemy prefab from direct path");
-            }
-            else
-            {
-                Debug.LogWarning("Could not find any enemy prefabs!");
-            }
-        }
-        else
-        {
-            foreach (GameObject prefab in enemyPrefabsArray)
-            {
-                // Normalize the prefab name to match enemyType expected in PointSystem
-                string normalizedName = prefab.name.Replace(" ", "").Replace("Enemy", "Enemy");
-                enemyPrefabs[normalizedName] = prefab;
-                Debug.Log($"Cached enemy prefab: {prefab.name} as {normalizedName}");
-            }
-        }
-    }
+    //     // Fallback: Directly load from Prefabs directory
+    //     if (enemyPrefabsArray.Length == 0)
+    //     {
+    //         // Try to find the Tomato Enemy prefab in FinalScenePrefabs
+    //         GameObject tomatoEnemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/FinalScenePrefabs/Tomato Enemy.prefab");
+    //         if (tomatoEnemyPrefab != null)
+    //         {
+    //             enemyPrefabs["TomatoEnemy"] = tomatoEnemyPrefab;
+    //             Debug.Log("Cached Tomato Enemy prefab from direct path");
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning("Could not find any enemy prefabs!");
+    //         }
+    //     }
+    //     else
+    //     {
+    //         foreach (GameObject prefab in enemyPrefabsArray)
+    //         {
+    //             // Normalize the prefab name to match enemyType expected in PointSystem
+    //             string normalizedName = prefab.name.Replace(" ", "").Replace("Enemy", "Enemy");
+    //             enemyPrefabs[normalizedName] = prefab;
+    //             Debug.Log($"Cached enemy prefab: {prefab.name} as {normalizedName}");
+    //         }
+    //     }
+    // }
 
     void OnDestroy()
     {
