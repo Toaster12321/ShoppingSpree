@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Juan's Stuff/Scenes/Final Scene.unity.meta
 guid: 8b4dff97bfd33a74592d696db07e5297
+========
+guid: 971636b3cdd949f4a91b97014bcdaf6e
+>>>>>>>> DougsTest3:Assets/Scripts/Inventory/Items/WeaponItem.cs.bak.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

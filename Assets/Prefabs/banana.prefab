@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fb4e5f1bda5b2df498383f8684b05e7d, type: 2}
     - target: {fileID: 919132149155446097, guid: a264a85706998464dbaaeba4dbcef630, type: 3}
       propertyPath: m_Name
-      value: banana
+      value: banana 1 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a264a85706998464dbaaeba4dbcef630, type: 3}
       propertyPath: m_Layer
@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a264a85706998464dbaaeba4dbcef630, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

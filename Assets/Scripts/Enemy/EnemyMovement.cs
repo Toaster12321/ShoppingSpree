@@ -46,6 +46,7 @@ public class EnemyMovement : MonoBehaviour
         if (gameObject.name.Contains("Tomato") || gameObject.name.Contains("tomato"))
         {
             enemyType = "TomatoEnemy";
+            pointValue = 100;
         }
     }
 
@@ -243,6 +244,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void Die()
     {
+        // Force Tomato Enemy to give 100 points
+        if (gameObject.name.Contains("Tomato") || gameObject.name.Contains("tomato"))
+        {
+            pointValue = 100;
+        }
+        
         // Notify the GameManager that this enemy has died, passing this enemy's GameObject
         if (GameManager.instance != null)
         {

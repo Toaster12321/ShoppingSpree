@@ -11,11 +11,20 @@ public class RayShooter : MonoBehaviour
     private Camera cam;
     [SerializeField] private AudioClip raygunSound;
     private PlayerCharacter _damageVar; // Damage dealt to the enemy
+    private Coroutine scannerLightCoroutine;
+
+    [Header("Scanner Settings")]
+    public GameObject scannerModel;
+    public KeyCode scannerToggleKey = KeyCode.Q;
+    public Light scannerLight;
+    public float scannerLightDuration = 0.2f;
+
+    
 
     void Start()
     {
         _damageVar = GetComponent<PlayerCharacter>();
-        
+
         cam = GetComponentInChildren<Camera>();
         if (cam == null)
         {
@@ -25,16 +34,22 @@ public class RayShooter : MonoBehaviour
         // Hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
 
-    private void OnGUI()
-    {
-        if (cam == null) return;
-
-        int size = 24;
-        float posX = cam.pixelWidth / 2 - size / 4;
-        float posY = cam.pixelHeight / 2 - size / 2;
-        GUI.Label(new Rect(posX, posY, size, size), "+");
+        // Start scanner and light
+        if (scannerModel != null) {
+        scannerModel.SetActive(true);
+        }
+        else {
+            Debug.LogWarning("Scanner model not assigned...");
+        }
+        if (scannerLight != null) {
+            scannerLight.enabled = false;
+        }
+        else {
+            if (scannerModel != null) {
+                Debug.LogWarning("Scanner light not assigned due to missing scanner model.");
+            }
+        }
     }
 
     private IEnumerator SphereIndicator(Vector3 pos)
@@ -43,10 +58,20 @@ public class RayShooter : MonoBehaviour
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         // Place sphere at pos passed in
         sphere.transform.position = pos;
+        sphere.transform.localScale = Vector3.one * 0.1f;
 
         // Wait
         yield return new WaitForSeconds(1);
         Destroy(sphere);
+    }
+
+    private IEnumerator FlashScannerLightEffect() {
+        if (scannerLight == null) yield break;
+
+        scannerLight.enabled = true;
+        yield return new WaitForSeconds(scannerLightDuration);
+        scannerLight.enabled = false;
+        scannerLightCoroutine = null;
     }
 
     void Update()
@@ -59,38 +84,78 @@ public class RayShooter : MonoBehaviour
             Shoot();
         }
     }
+
+    public void ToggleScanner() {
+        if (scannerModel != null) {
+            bool currentScannerState = scannerModel.activeSelf;
+            scannerModel.SetActive(!currentScannerState);
+            Debug.Log("Scanner " + (scannerModel.activeSelf ? "activated" : "deactivated"));
+        }
+        else {
+            Debug.LogWarning("Scanner toggle failed. No scanner model assigned.");
+        }
+    }
     
     /// <summary>
     /// Public method to fire the weapon that can be called from inventory items
     /// </summary>
     public void Shoot()
-    {
-        if (cam == null) return;
-        
-        Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
-        Ray ray = cam.ScreenPointToRay(point);
-        if (SoundFXManager.instance != null && raygunSound != null) // Good practice to check for SoundFXManager too
-        {
-            SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, .5f);
+{
+    if (cam == null) return;
+
+    // Scanner light activation
+    if (scannerModel != null && scannerModel.activeSelf && scannerLight != null) {
+        if (scannerLightCoroutine != null) {
+            StopCoroutine(scannerLightCoroutine);
         }
+        scannerLightCoroutine = StartCoroutine(FlashScannerLightEffect());
+    }
+    
+    Vector3 point = new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0);
+    Ray ray = cam.ScreenPointToRay(point);
+    if (SoundFXManager.instance != null && raygunSound != null) // Good practice to check for SoundFXManager too
+    {
+        SoundFXManager.instance.PlaySoundFXClip(raygunSound, transform, .5f);
+    }
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit)) // Consider adding a max distance: Physics.Raycast(ray, out hit, yourMaxRayDistance)
+    RaycastHit hit;
+    if (Physics.Raycast(ray, out hit)) // Consider adding a max distance: Physics.Raycast(ray, out hit, yourMaxRayDistance)
+    {
+        Debug.Log("Raycast Hit: " + hit.transform.name + " at point: " + hit.point);
+        GameObject hitObject = hit.transform.gameObject;
+
+        // --- MODIFICATION FOR FLYING BANANA ---
+        FlyingBananaAI bananaEnemy = hitObject.GetComponent<FlyingBananaAI>();
+        if (bananaEnemy != null)
         {
-            // Debug.Log("Raycast Hit: " + hit.transform.name + " at point: " + hit.point);
-            GameObject hitObject = hit.transform.gameObject;
-
-            // --- MODIFICATION FOR FLYING BANANA ---
-            FlyingBananaAI bananaEnemy = hitObject.GetComponent<FlyingBananaAI>();
-            if (bananaEnemy != null)
+            Debug.Log("Hit a Flying Banana!");
+            // Ensure _damageVar and currentDMG are valid. TakeDamage in FlyingBananaAI expects an int.
+            if (_damageVar != null)
             {
-                // Debug.Log("Hit a Flying Banana!");
-                // Ensure _damageVar and currentDMG are valid. TakeDamage in FlyingBananaAI expects an int.
+                bananaEnemy.TakeDamage((int)_damageVar.currentDMG); 
+            }
+            else
+            {
+                Debug.LogWarning("PlayerCharacter (_damageVar) not found on RayShooter.");
+            }
+            
+        }
+        
+        else 
+        {
+            EnemyMovement otherEnemy = hitObject.GetComponent<EnemyMovement>();
+            if (otherEnemy != null)
+            {
+                Debug.Log("Hit an EnemyMovement type enemy!");
                 if (_damageVar != null)
                 {
-                    bananaEnemy.TakeDamage((int)_damageVar.currentDMG); 
+                    otherEnemy.TakeDamage(_damageVar.currentDMG); // EnemyMovement's TakeDamage expects a float
                 }
-                
+                else
+                {
+                    Debug.LogWarning("PlayerCharacter (_damageVar) not found on RayShooter.");
+                }
+                Messenger.Broadcast(GameEvent.ENEMY_HIT);
             }
             // First check for our new consolidated enemy script
             else if (hitObject.GetComponent<ConsolidatedEnemy>() != null)
@@ -131,4 +196,9 @@ public class RayShooter : MonoBehaviour
             // Debug.Log("Raycast hit nothing.");
         }
     }
+    else
+    {
+        Debug.Log("Raycast hit nothing.");
+    }
+}
 }
