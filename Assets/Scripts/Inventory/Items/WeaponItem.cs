@@ -10,6 +10,7 @@ public class WeaponItem : Item
 {
     [Header("Weapon Properties")]
     [SerializeField] private int damage = 10;
+    public int Damage => damage; // Public property to access damage
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private int ammoCount = 30;
     [SerializeField] private int maxAmmo = 30;
