@@ -8,6 +8,8 @@ TagManager:
   - Trap
   - Enemy
   - Interactable
+  - TomatoEnemy
+  - CheeseMonster
   layers:
   - Default
   - TransparentFX

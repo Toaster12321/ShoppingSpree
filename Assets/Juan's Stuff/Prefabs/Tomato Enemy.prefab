@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2cfd470f9c8819945b9b7105b28c1470, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: TomatoEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf120558eb333e49b1c3da2ab40f501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: DefaultEnemy
+  enemyType: TomatoEnemy
   pointValue: 100
   maxHealth: 100
   currentHealth: 0
