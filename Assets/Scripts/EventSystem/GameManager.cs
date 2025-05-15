@@ -151,89 +151,34 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator RespawnEnemy(GameObject deadEnemy)
     {
-        // Store the enemy's position and type
         Vector3 spawnPosition = deadEnemy.transform.position;
         Quaternion spawnRotation = deadEnemy.transform.rotation;
-        
-        // Get the enemy's tag
-        string enemyTag = deadEnemy.tag;
-        if (string.IsNullOrEmpty(enemyTag) || enemyTag == "Untagged")
-        {
-            Debug.LogWarning($"Dead enemy {deadEnemy.name} has no specific tag or is 'Untagged'. Respawn might fail or use default.");
-            // Optionally, try to get type from EnemyMovement as a fallback if tag is missing
-            EnemyMovement मृतEnemyMovement = deadEnemy.GetComponent<EnemyMovement>();
-            if (मृतEnemyMovement != null && !string.IsNullOrEmpty(मृतEnemyMovement.enemyType)) {
-                enemyTag = मृतEnemyMovement.enemyType; // Fallback to enemyType if tag is bad
-                Debug.Log($"Using enemyType '{enemyTag}' as fallback for respawn key.");
-            } else {
-                enemyTag = "TomatoEnemy"; // Ultimate fallback if no tag and no type
-                Debug.Log("Using 'TomatoEnemy' as ultimate fallback key for respawn.");
-            }
-        }
-        
-        // Original enemyType for setting on the new instance, if available
-        string originalEnemyType = "DefaultEnemy";
-        EnemyMovement originalEnemyMovement = deadEnemy.GetComponent<EnemyMovement>();
-        if (originalEnemyMovement != null)
-        {
-            originalEnemyType = originalEnemyMovement.enemyType;
-        }
-        
-        Debug.Log($"Trying to respawn enemy with tag/key: {enemyTag}. Original type was: {originalEnemyType}");
-        
-        // Wait for respawn delay
+
         yield return new WaitForSeconds(respawnDelay);
-        
-        // Try to find the matching prefab using the tag
+
+        // Randomly choose between TomatoEnemy and CheeseMonster
+        string[] possibleTags = { "TomatoEnemy", "CheeseMonster" };
+        string chosenTag = possibleTags[Random.Range(0, possibleTags.Length)];
+
         GameObject prefabToSpawn = null;
-        
-        if (enemyPrefabs.TryGetValue(enemyTag, out prefabToSpawn))
+        if (enemyPrefabs.TryGetValue(chosenTag, out prefabToSpawn))
         {
-            Debug.Log($"Found prefab by tag/key: {enemyTag}");
+            Debug.Log($"Randomly respawning enemy with tag: {chosenTag}");
         }
-        // Fallback: Try original prefab name if tag lookup fails (e.g., if cache used normalized name for untagged items)
-        else
+        else if (defaultEnemyPrefab != null)
         {
-            string prefabName = deadEnemy.name.Replace("(Clone)", "").Trim();
-            if (enemyPrefabs.TryGetValue(prefabName, out prefabToSpawn))
-            {
-                Debug.Log($"Found prefab by name: {prefabName} as fallback.");
-            }
-            // Last resort: Direct reference to defaultEnemyPrefab
-            else if (defaultEnemyPrefab != null)
-            {
-                prefabToSpawn = defaultEnemyPrefab;
-                Debug.Log($"Using default enemy prefab because tag '{enemyTag}' and name '{prefabName}' were not found in cache.");
-            }
-        }
-        
-        if (prefabToSpawn != null)
-        {
-            // Spawn the enemy
-            GameObject newEnemy = Instantiate(prefabToSpawn, spawnPosition, spawnRotation);
-            
-            // Ensure the new enemy has the same EnemyMovement.enemyType as the original, if applicable
-            // The tag will be inherited from the prefab.
-            EnemyMovement newEnemyMovement = newEnemy.GetComponent<EnemyMovement>();
-            if (newEnemyMovement != null)
-            {
-                // If the prefab's enemyType is generic, set it to the original specific type
-                if (string.IsNullOrEmpty(newEnemyMovement.enemyType) || newEnemyMovement.enemyType == "DefaultGroundEnemy" || newEnemyMovement.enemyType == "DefaultEnemy")
-                {
-                    newEnemyMovement.enemyType = originalEnemyType;
-                }
-                // Ensure pointValue is what's on the prefab, unless we want to carry it over (currently not)
-                // newEnemyMovement.pointValue = originalEnemyMovement != null ? originalEnemyMovement.pointValue : newEnemyMovement.pointValue;
-                Debug.Log($"Set new enemy's type to: {newEnemyMovement.enemyType}. Tag is: {newEnemy.tag}");
-            }
-            
-            enemyCount++;
-            Debug.Log($"Enemy {newEnemy.name} (tag: {newEnemy.tag}) respawned at {spawnPosition}. New count: {enemyCount}");
+            prefabToSpawn = defaultEnemyPrefab;
+            Debug.Log($"Using default enemy prefab because tag '{chosenTag}' was not found in cache.");
         }
         else
         {
-            Debug.LogWarning($"Could not find prefab for enemy tag/key: {enemyTag}. No enemy respawned.");
+            Debug.LogWarning($"Could not find prefab for enemy tag/key: {chosenTag}. No enemy respawned.");
+            yield break;
         }
+
+        GameObject newEnemy = Instantiate(prefabToSpawn, spawnPosition, spawnRotation);
+        enemyCount++;
+        Debug.Log($"Enemy {newEnemy.name} (tag: {newEnemy.tag}) respawned at {spawnPosition}. New count: {enemyCount}");
     }
 
     private void Victory()
