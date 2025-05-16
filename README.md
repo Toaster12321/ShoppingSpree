@@ -1,4 +1,5 @@
 ------------Final Version------------------------------------------------------------
+
 Our additions to the game include a new endless game mode added to our game, Shopping spree. 
 In this game mode the player is controlled inside a haunted restaraunt must fight food-based enemies to survive.
 The game mode is wave based, meaning the player must survive and beat a number of waves before they win.
@@ -6,9 +7,9 @@ It includes interactable doors which can be unlocked through the points system, 
 a new level with new assets and a powerup system based on enemy drops.
 
 Contributions(Name, github username):
-Antonio Crawford(Toaster12321)- Powerup drop system, Powerup assets, In-game UI
+Antonio Crawford(Toaster12321)- Powerup drop system, Powerup assets, In-game UI, Inventory System
 Connor Lahm(Clahm21)- Title screen, Title Screen UI, Updated Game Manager script
-Jason Huang(GoblinJay)-Level Design, Level Assets, Darkness/Flashlight Mechanic, Point System, Tomato Enemy, Enemy AI, Enemy Spawn Room
+Jason Huang(GoblinJay)-Level Design, Level Assets, Darkness/Light Mechanic, Flaslight Item + Model, Point System, Tomato Enemy, Enemy AI, Enemy Spawn Room
 Doug Fry(dogfryd)- Flying Banana Enemy AI, Enemy Assets, Enemy Design, Sound Design
 Anthony Arocha(canturtle)- Scanner Model, Scanner Implementation
 Juan Enrqiuez(From other game programming section, PapiSenpai)- Enemy Animation, Enemy Models, Level Assets, Enemy AI, Enemy Spawn Room
